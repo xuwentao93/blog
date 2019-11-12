@@ -1,20 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import count from '@/store/modules/count'
+import user from '@/store/modules/user'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  modules:{
-    count
+  modules: {
+    user
   },
-  state:{
-    number:1
-  },
-  mutations:{
-    accountCount(state){
-      state.number++
-      console.log(state.number)
-    }
+  state: {
+    number: 1
   }
 })

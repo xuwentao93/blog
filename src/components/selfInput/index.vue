@@ -14,7 +14,11 @@
 
 <script>
 export default {
-  props: ["value", "width"],
+  props: {
+    value: {
+      type: String
+    }
+  },
   methods: {
     enter() {
       this.$emit("enter");
@@ -29,7 +33,7 @@ export default {
 <style scoped lang='scss'>
 .self-input {
   display: inline-block;
-  width: 95%;
+  width: 80%;
   height: 28px;
   padding: 6px 8px;
   border: 1px solid rgb(209, 213, 218);

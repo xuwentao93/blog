@@ -13,5 +13,4 @@ export default {
 
 <style lang='scss'>
 @import './style/index.css';
-@import './style/font.css';
 </style>

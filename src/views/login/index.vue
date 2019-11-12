@@ -150,7 +150,7 @@ el-button {
     margin-bottom: 8px;
     font-size: 20px;
     color: #f00;
-    font-family: "zhong shan";
+    // font-family: "zhong shan";
     font-size: 28px;
     font-weight: 600;
   }

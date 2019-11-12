@@ -2,8 +2,8 @@
   <div class="homepage">
     <div class="top">
       <div class="title">
-        <span class="name">等待</span>
-        <span class="theme">的个人博客</span>
+        <span class="name">徐文韬</span>
+        <span class="theme">的生活记录</span>
       </div>
     </div>
     <div class="menu">
@@ -15,11 +15,13 @@
       <self-input>
         <i class="fa fa-search"></i>
       </self-input>
-      <div class="login-button">登录</div>
+      <div class="login-button">
+        <router-link to='/login'>登录</router-link>
+      </div>
       <div class="register-button">注册</div>
     </div>
     <div class="main">
-      <carousel></carousel>
+      <carousel-content></carousel-content>
       <today></today>
     </div>
   </div>
@@ -27,36 +29,29 @@
 
 <script>
 import selfInput from "@/components/selfInput";
-import carousel from "./childView/carousel";
+import carouselContent from "./childView/carousel";
 import today from "./childView/today";
-import {test} from "@/api/login";
+import { test } from "@/api/login";
+import { menus } from '@/config'
 export default {
   components: {
     today,
-    carousel,
+    carouselContent,
     selfInput
   },
   data() {
     return {
-      menus: [
-        { url: "test", content: "首页" },
-        { url: "test", content: "学习" },
-        { url: "test", content: "日志" },
-        { url: "test", content: "感悟" },
-        { url: "test", content: "闹钟" },
-        { url: "test", content: "前端动态" },
-        { url: "test", content: "生活" }
-      ]
-    };
+      menus
+    }
   },
   methods: {
     test() {
-      test({}).then(res => console.log(res.data));
+      test({}).then(res => console.log(res.data))                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
       // console.log(test)
     }
   },
   mounted() {
-    this.test()
+    // this.test()
   }
 };
 </script>
@@ -129,7 +124,7 @@ a {
       vertical-align: top;
       color: #fff;
       cursor: pointer;
-      transition: background-color 0.6s;
+      transition: background-color .6s;
       &:hover {
         background: #fff;
       }
@@ -141,7 +136,7 @@ a {
     text-align: center;
     height: inherit;
     cursor: pointer;
-    transition: background-color 0.6s;
+    transition: background-color .6s;
   }
   .login-button {
     margin-left: 80px;
@@ -164,7 +159,7 @@ a {
   margin: 20px 8% 0 8%;
   height: 1200px;
   .left-main {
-    margin-right: 20px;
+    // margin-right: 20px;
     background: #555;
   }
   .right-main {
