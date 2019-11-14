@@ -194,7 +194,7 @@ export default {
   data(){
     return {
       buttonLoop:3,
-      loading:[false,false,false],
+      loading:[false, false, false],
       hello:'hello',
       test:'test'
     }

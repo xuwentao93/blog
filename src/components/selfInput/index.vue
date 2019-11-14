@@ -1,13 +1,13 @@
 <template>
-  <span class='self-input-container'>
-    <input
-      type="text"
-      class="self-input"
-      @change="change"
-      @keyup.enter="enter"
-      :value="value"
-      @input="$emit('input', $event.target.value)"
-    />
+<span class='self-input-container'>
+  <input
+    :type="type"
+    class="self-input"
+    @change="change"
+    @keyup.enter="enter"
+    :value="value"
+    @input="$emit('input', $event.target.value)"
+  />
     <slot></slot>
   </span>
 </template>
@@ -17,14 +17,18 @@ export default {
   props: {
     value: {
       type: String
+    },
+    type: {
+      type: String,
+      default: "text"
     }
   },
   methods: {
     enter() {
-      this.$emit("enter");
+      this.$emit("enter")
     },
     change() {
-      this.$emit("change");
+      this.$emit("change")
     }
   }
 };

@@ -3,7 +3,7 @@
     <div class="top">
       <div class="title">
         <span class="name">徐文韬</span>
-        <span class="theme">的生活记录</span>
+        <span class="theme">的个人博客</span>
       </div>
     </div>
     <div class="menu">
@@ -15,10 +15,13 @@
       <self-input>
         <i class="fa fa-search"></i>
       </self-input>
-      <div class="login-button">
-        <router-link to='/login'>登录</router-link>
-      </div>
-      <div class="register-button">注册</div>
+      <router-link class="login-button" v-if='user === null' to='/login'>
+        登录
+      </router-link>
+      <router-link class="register-button" v-if='user === null' to='/register'>
+        注册
+      </router-link>
+      <div class="username" v-if='user !== null'>你好,{{user}}</div>
     </div>
     <div class="main">
       <carousel-content></carousel-content>
@@ -28,10 +31,9 @@
 </template>
 
 <script>
-import selfInput from "@/components/selfInput";
-import carouselContent from "./childView/carousel";
-import today from "./childView/today";
-import { test } from "@/api/login";
+import selfInput from "@/components/selfInput"
+import carouselContent from "./childView/carousel"
+import today from "./childView/today"
 import { menus } from '@/config'
 export default {
   components: {
@@ -41,17 +43,12 @@ export default {
   },
   data() {
     return {
-      menus
-    }
-  },
-  methods: {
-    test() {
-      test({}).then(res => console.log(res.data))                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-      // console.log(test)
+      menus,
+      user: this.$store.state.user.user
     }
   },
   mounted() {
-    // this.test()
+    // console.log(this.$store.state.user.user === null)
   }
 };
 </script>
@@ -73,7 +70,7 @@ a {
   height: 120px;
   background: #49f;
   .title {
-    width: 330px;
+    width: 350px;
     margin: 0 auto;
     text-align: center;
     line-height: 120px;
@@ -90,6 +87,7 @@ a {
       transition: opacity 1.5s, left 1.5s;
     }
     &:hover {
+      width: 500px;
       cursor: pointer;
       .name {
         letter-spacing: 10px;
@@ -119,19 +117,23 @@ a {
     .menu-link {
       display: inline-block;
       width: 75px;
+      height: 52px;
       line-height: 52px;
       font-size: 17px;
       vertical-align: top;
-      color: #fff;
       cursor: pointer;
       transition: background-color .6s;
       &:hover {
+        border-top: 4px solid #f77825;
+        line-height: 44px;
+        color: #49f;
         background: #fff;
       }
     }
   }
   .login-button,
   .register-button {
+    display: block;
     width: 75px;
     text-align: center;
     height: inherit;
@@ -149,6 +151,14 @@ a {
     &:hover {
       background: #899;
     }
+  }
+  .username {
+    position: absolute;
+    right: 20px;
+    height: 52px;
+    line-height: 52px;
+    text-align: center;
+    color: #49f;
   }
 }
 

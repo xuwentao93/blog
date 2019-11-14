@@ -16,9 +16,9 @@ export default new router({
     component: () => import('@/views/login')
   },
   {
-    path: '/test',
-    name: 'test',
-    component: () => import('@/components/test/learnComponents/father')
-  },
+    path: '/register',
+    name: 'register',
+    component: () => import('@/views/register')
+  }
   ]
 })

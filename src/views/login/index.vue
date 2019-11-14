@@ -3,7 +3,7 @@
     <!-- <div class="doctor-flag"></div> -->
     <div class="login-form">
       <div class="title">欢迎登录！</div>
-      <img src="./logo.png" class="logo" />
+      <img src="../../assets/imgs/login/logo.png" class="logo" />
       <div>
         <i class="fa fa-user-o"></i>
         <self-input placeholder="请输入用户名" v-model="username" @change="checkUser" style="width:70%"></self-input>
@@ -23,11 +23,11 @@
       </div>
       <el-button type="primary" class="login-button" @click="login">登录</el-button>
       <div>
-        <router-link to="/regist" class="regist">注册</router-link>
+        <router-link to="/register" class="regist">注册</router-link>
         <router-link to="/forget" class="forget">忘记密码</router-link>
       </div>
       <div></div>
-      <div class="breif">Copyright © 2017-2017 特别鸣谢管理员对本页面的贡献</div>
+      <div class="breif">Copyright © 2017-2019 特别鸣谢管理员对本页面的贡献</div>
     </div>
   </div>
 </template>
@@ -42,68 +42,63 @@ export default {
   },
   data() {
     return {
-      username: "",
-      password: "",
-      userErr: "",
-      pwErr: ""
+      username: '',
+      password: '',
+      userErr: '',
+      pwErr: ''
     };
   },
   methods: {
     ...mapMutations({
-      setUser: "setUser",
-      setToken: "setToken"
+      setUser: "setUser"
     }),
     checkUser() {
-      const firstnameExp = /^[a-zA-Z]$/; //定义用户名正则表达式匹配规则
-      const nameExp = /^[a-zA-Z_0-9]{6,12}$/;
+      const firstnameExp = /^[a-zA-Z]$/ // 定义用户名正则表达式匹配规则
+      const nameExp = /^[a-zA-Z_0-9]{6,12}$/
       if (this.username.length < 6 || this.username.length > 12) {
-        this.userErr = "用户名不能小于6位或者大于12位";
+        this.userErr = '用户名不能小于6位或者大于12位'
       } else if (firstnameExp.exec(this.username.charAt(0)) == null) {
-        this.userErr = "用户名首位必须是字母";
+        this.userErr = '用户名首位必须是字母'
       } else if (nameExp.exec(this.username) == null) {
-        this.userErr = "用户名只能为字母，数字，或者下划线";
-      } else this.userErr = "";
+        this.userErr = '用户名只能为字母，数字，或者下划线'
+      } else this.userErr = ''
     },
     checkPw() {
       if (this.password.length < 8 || this.password.length > 16) {
-        this.pwErr = "密码不能小于8位或者大于16位！";
-      } else this.pwErr = "";
+        this.pwErr = "密码不能小于8位或者大于16位！"
+      } else this.pwErr = ''
     },
     login() {
       if (!this.username) {
-        this.userErr = "用户名不能为空！";
-        return;
+        this.userErr = "用户名不能为空！"
+        return
       } else if (!this.password) {
-        this.pwErr = "密码不能为空！";
+        this.pwErr = "密码不能为空！"
       } else if (this.pwErr == "" && this.userErr == "") {
         login({
           username: this.username,
           password: this.password
         })
           .then(res => {
-            console.log(res.data);
-            if (res.data == "wrong1" || res.data == "wrong2") {
-              alert("用户名或密码错误！");
+            if (res.data === "user error") {
+              alert("用户名或密码错误！")
               return;
             } else {
               const response = {
                 //返回的格式以对象储存
-                username: res.data[0],
-                permission: res.data[1]
-              };
-              this.setUser(response.username);
-              this.setToken(response.permission);
-              this.$router.push("/main");
+                username: res.data.username,
+              }
+              this.setUser(response.username)
+              this.$router.push("/")
             }
           })
-          .catch(err => console.log("错误！" + err));
+          .catch(err => console.log("错误！" + err))
       }
     }
-  }
+   }
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang='scss'>
 el-input,
 el-button {
@@ -115,7 +110,7 @@ el-button {
 .login-page {
   width: 100%;
   height: 100vh;
-  background: url("./bg.jpg") no-repeat;
+  background: url("../../assets/imgs/login/bg.jpg") no-repeat;
   background-size: 100% 100%;
 }
 .login-form {
@@ -165,7 +160,7 @@ el-button {
     display: block;
     margin: 0 auto;
     margin-bottom: 20px;
-    width: 74%;
+    width: 75%;
   }
   .regist,
   .forget {
