@@ -1,11 +1,14 @@
 <template>
   <div class="homepage">
-    <div class="top">
+    <div class="navigation-bar">
       <div class="title">
         <span class="name">徐文韬</span>
         <span class="theme">的个人博客</span>
       </div>
     </div>
+
+    <div class="block"></div>
+
     <div class="menu">
       <ul class="list">
         <li v-for="menu in menus" :key="menu.content" class="menu-link">
@@ -23,22 +26,17 @@
       </router-link>
       <div class="username" v-if='user !== null'>你好,{{user}}</div>
     </div>
-    <div class="main">
-      <carousel-content></carousel-content>
-      <today></today>
-    </div>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 import selfInput from "@/components/selfInput"
-import carouselContent from "./childView/carousel"
-import today from "./childView/today"
 import { menus } from '@/config'
 export default {
   components: {
-    today,
-    carouselContent,
+    // today,
+    // carouselContent,
     selfInput
   },
   data() {
@@ -65,25 +63,30 @@ a {
   color: #99a;
 }
 
-.top {
+.navigation-bar {
   //顶部样式
-  height: 120px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 90px;
+  z-index: 999;
   background: #49f;
   .title {
     width: 350px;
     margin: 0 auto;
     text-align: center;
-    line-height: 120px;
+    line-height: 90px;
     color: #fff;
     font-family: "time";
     .name {
-      font-size: 57px;
+      font-size: 45px;
       transition: letter-spacing 1.5s;
     }
     .theme {
       position: relative;
       left: 16px;
-      font-size: 28px;
+      font-size: 22px;
       transition: opacity 1.5s, left 1.5s;
     }
     &:hover {
@@ -100,12 +103,22 @@ a {
   }
 }
 
+.block {
+  width: 100%;
+  height: 142px;
+}
+
 .menu {
   //菜单栏布局
+  position: fixed;
+  top: 90px;
+  left: 0;
   display: flex;
   align-items: center;
   height: 52px;
+  width: 100%;
   line-height: 52px;
+  z-index: 999;
   background: #000;
   color: #fff;
   .list {
@@ -123,6 +136,11 @@ a {
       vertical-align: top;
       cursor: pointer;
       transition: background-color .6s;
+      a {
+        display: block;
+        width: 75px;
+        height: 52px;
+      }
       &:hover {
         border-top: 4px solid #f77825;
         line-height: 44px;

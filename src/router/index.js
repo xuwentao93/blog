@@ -7,8 +7,26 @@ export default new router({
   mode: 'history',
   routes: [{
     path: '/',
+    redirect: '/home',
     name: 'main',
-    component: () => import('@/views/main')
+    component: () => import('@/views/main'),
+    children: [
+      {
+        path: '/home',
+        name: 'home',
+        component: () => import('@/views/home')
+      },
+      {
+        path: '/dictionary',
+        name: 'dictionary',
+        component: () => import('@/views/dictionary')
+      },
+      {
+        path: '/write',
+        name: 'write',
+        component: () => import('@/views/write')
+      }
+    ]
   },
   {
     path: '/login',

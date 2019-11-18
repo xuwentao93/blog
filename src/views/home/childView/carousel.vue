@@ -12,27 +12,27 @@ export default {
     return {
       carouselList: [
         {
-          url:require('../../../assets/imgs/carousel/1.jpg'),
+          url:require('@/assets/imgs/carousel/1.jpg'),
           link:'https://www.baidu.com'
         },
         {
-          url:require('../../../assets/imgs/carousel/2.jpg'),
+          url:require('@/assets/imgs/carousel/2.jpg'),
           link:'https://www.baidu.com'
         },
         {
-          url:require('../../../assets/imgs/carousel/3.jpg'),
+          url:require('@/assets/imgs/carousel/3.jpg'),
           link:'https://www.baidu.com'
         },
         {
-          url:require('../../../assets/imgs/carousel/4.jpg'),
+          url:require('@/assets/imgs/carousel/4.jpg'),
           link:'https://www.baidu.com'
         },
         {
-          url:require('../../../assets/imgs/carousel/5.jpg'),
+          url:require('@/assets/imgs/carousel/5.jpg'),
           link:'https://www.baidu.com'
         },
         {
-          url:require('../../../assets/imgs/carousel/6.jpeg'),
+          url:require('@/assets/imgs/carousel/6.jpeg'),
           link:'https://www.baidu.com'
         }
       ]
