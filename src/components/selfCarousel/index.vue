@@ -34,6 +34,10 @@ export default {
     },
     autoplay: { // 是否自动播放.
       type: Boolean
+    },
+    size: {
+      type: Number, // !!这个属性目前还未完善, 后续必须加进去.表示轮播图的大小.
+      default: 100 // 自己也考虑配个默认值.
     }
   },
   methods: {
