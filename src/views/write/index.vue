@@ -27,6 +27,12 @@ export default {
     changeMsg(text) {
       this.msg = text
     } 
+  },
+  mounted() {
+    if(this.$store.state.user.user !== 'piedaochuan') {
+      alert(404)
+      this.$router.push('/login')
+    }
   }
 } 
 </script>

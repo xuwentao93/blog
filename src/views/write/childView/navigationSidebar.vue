@@ -2,7 +2,7 @@
   <div class="title">
     <div class="upload">
       <el-button type="primary" @click="save">保存</el-button>
-      <el-button type="success" @click="handIn">发布</el-button>
+      <el-button type="success" @click="upload">发布</el-button>
     </div>
     <input type="text" v-model="title" placeholder="请输入文章标题..." spellcheck="false"/>
     <div class="tools">
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { save, handIn } from '@/api/file'
+import { save, upload } from '@/api/file'
 export default {
   props: {
     msg: String
@@ -30,25 +30,25 @@ export default {
       save({
         type: 'dictionary',
         username: this.$store.state.user.user,
-        title: this.title,
+        title: `<div class='dict-msg-title-only'>${this.title}</div>`,
         msg: this.msg
       })
       .then(res => {
-        console.log(res.data)
+        alert('保存成功!')
       })
       .catch(error => console.log('save error: ' + error))
     },
-    handIn() {
-      let ifHandIn = confirm('确认要提交吗')
+    upload() {
+      let ifHandIn = confirm('确认要上传吗')
       if (!ifHandIn) return
-      handIn({
+      upload({
         type: 'dictionary',
         username: this.$store.state.user.user,
-        title: this.titile,
+        title: `<div class='dict-msg-title-only'>${this.title}</div>`,
         msg: this.msg
       })
       .then(res => {
-        console.log(res.data)
+        alert('上传成功')
       })
       .catch(error => console.log('handIn error: ' + error))
     },

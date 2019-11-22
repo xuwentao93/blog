@@ -1,5 +1,5 @@
 <template>
-  <div class="write" tabindex='1' ref='write' contenteditable='true' @input='write' spellcheck="false"></div>
+  <div class="write" tabindex='0' ref='write' contenteditable='true' @input='write' spellcheck="false"></div>
 </template>
 
 <script>

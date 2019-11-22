@@ -25,6 +25,11 @@ export default new router({
         path: '/write',
         name: 'write',
         component: () => import('@/views/write')
+      },
+      {
+        path: '/dictionary/:id',
+        name: 'readDict',
+        component: () => import('@/views/readDict')
       }
     ]
   },

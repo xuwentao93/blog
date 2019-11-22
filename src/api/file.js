@@ -2,4 +2,6 @@ import request from '@/utils/request'
 
 export const save = data => request.post('/save', data) // 文章保存
 
-export const handIn = data => request.post('/handIn', data) // 文章上传
+export const upload = data => request.post('/upload', data) // 文章上传
+
+export const readDict = data => request.get('/readDict', { params : data }) // 读取日记
