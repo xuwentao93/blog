@@ -34,7 +34,7 @@ export default {
         msg: this.msg
       })
       .then(res => {
-        alert('保存成功!')
+        if (res.data === 'success') alert('保存成功!')
       })
       .catch(error => console.log('save error: ' + error))
     },
@@ -48,7 +48,7 @@ export default {
         msg: this.msg
       })
       .then(res => {
-        alert('上传成功')
+        if (res.data === 'success') alert('上传成功')
       })
       .catch(error => console.log('handIn error: ' + error))
     },

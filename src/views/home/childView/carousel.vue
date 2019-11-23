@@ -50,7 +50,7 @@ export default {
 
 <style scoped lang='scss'>
 .carousel {
-  width: calc(100% - 20px);
+  width: 100%;
   height: 300px;
 }
 </style>

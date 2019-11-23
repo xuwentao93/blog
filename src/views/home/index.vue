@@ -1,26 +1,25 @@
 <template>
   <div class="main">
     <carousel-content></carousel-content>
-    <today></today>
+    <decoration-home></decoration-home>
+    <essay-list></essay-list>
+
   </div>
 </template>
 
 <script>
 import carouselContent from "./childView/carousel"
-import today from "./childView/today"
+import decorationHome from "./childView/decoration"
+import essayList from './childView/essay'
 
 export default {
   components: {
     carouselContent,
-    today
+    decorationHome,
+    essayList
   }
 }
 </script>
 
 <style scoped lang='scss'>
-.todayPage{
-  height: 350px;
-  background: #f66;
-  border-radius: 3px;
-}
 </style>

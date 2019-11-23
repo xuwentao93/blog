@@ -1,6 +1,5 @@
 <template>
   <div class="login-page">
-    <!-- <div class="doctor-flag"></div> -->
     <div class="login-form">
       <div class="title">欢迎登录！</div>
       <img src="../../assets/imgs/login/logo.png" class="logo" />
@@ -11,14 +10,9 @@
       </div>
       <div>
         <i class="fa fa-eye"></i>
-        <self-input
-          placeholder="请输入密码"
-          v-model="password"
-          type="password"
-          @change="checkPw"
-          @enter="login"
-          style="width:70%;"
-        ></self-input>
+        <self-input placeholder="请输入密码" v-model="password" type="password" style="width:70%;"
+          @change="checkPw" @enter="login">
+        </self-input>
         <span class="warn">{{pwErr}}</span>
       </div>
       <el-button type="primary" class="login-button" @click="login">登录</el-button>
@@ -33,9 +27,9 @@
 </template>
 
 <script>
-import { login } from "@/api/login";
-import { mapMutations } from "vuex";
-import selfInput from "@/components/selfInput";
+import { login } from "@/api/login"
+import { mapMutations } from "vuex"
+import selfInput from "@/components/selfInput"
 export default {
   components: {
     selfInput
@@ -45,7 +39,8 @@ export default {
       username: '',
       password: '',
       userErr: '',
-      pwErr: ''
+      pwErr: '',
+      next: '' // 后续路由要跳转的位置.
     };
   },
   methods: {
@@ -82,19 +77,29 @@ export default {
           .then(res => {
             if (res.data === "user error") {
               alert("用户名或密码错误！")
-              return;
+              return
             } else {
               const response = {
                 //返回的格式以对象储存
                 username: res.data.username,
               }
               this.setUser(response.username)
-              this.$router.push("/")
+              // this.$router.push(this.next)
             }
           })
           .catch(err => console.log("错误！" + err))
       }
     }
+   },
+   beforeRouteEnter(to, from, next) {
+     next(vm => {
+       vm.next = from.fullPath
+     })
+   },
+   mounted() {
+     this.$router.beforeEach(((to, from, next) => {
+       console.log(from)
+     }))
    }
 };
 </script>

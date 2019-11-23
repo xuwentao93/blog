@@ -7,8 +7,6 @@
       </div>
     </div>
 
-    <div class="block"></div>
-
     <div class="menu">
       <ul class="list">
         <li v-for="menu in menus" :key="menu.content" class="menu-link">
@@ -44,14 +42,14 @@ export default {
       menus,
       user: this.$store.state.user.user
     }
-  },
-  mounted() {
-    // console.log(this.$store.state.user.user === null)
   }
 };
 </script>
 
 <style scoped lang='scss'>
+.homepage {
+  background: #f4f5f5;
+}
 a {
   //some basic modify
   color: #fff;
@@ -65,9 +63,6 @@ a {
 
 .navigation-bar {
   //顶部样式
-  position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 90px;
   z-index: 999;
@@ -103,16 +98,8 @@ a {
   }
 }
 
-.block {
-  width: 100%;
-  height: 142px;
-}
-
 .menu {
   //菜单栏布局
-  position: fixed;
-  top: 90px;
-  left: 0;
   display: flex;
   align-items: center;
   height: 52px;
@@ -184,19 +171,17 @@ a {
   //主要内容样式布局
   display: grid;
   grid-template-columns: 70% 30%;
-  margin: 20px 8% 0 8%;
-  height: 1200px;
-  .left-main {
-    // margin-right: 20px;
-    background: #555;
-  }
-  .right-main {
-    background: #299;
-  }
+  grid-template-rows: 300px 1fr;
+  grid-row-gap: 20px;
+  grid-column-gap: 20px;
+  margin: 0 8%;
+  padding: 20px;
+  // height: 1200px;
 }
 </style>
 
 <style lang='scss'>
+
 .self-input-container {
   position: relative;
 }
