@@ -45,7 +45,7 @@ export default {
 </script>
 
 <style lang='scss'>
-.decoration div{
+.decoration>div{
   padding: 10px;
   margin-bottom: 16px;
   background: #fff;

@@ -9,6 +9,7 @@
       </span>
     </p>
     <a class='title' href='#' @click='redirect'>{{ data.title }}</a>
+    <div v-html='data.text' class='hidden'></div>
   </div>
 </template>
 
@@ -18,7 +19,7 @@ export default {
   data () {
     return {
       data: {
-        time: '2019.12.21',
+        time: '2019.11.21',
         title: '今天哈哈哈哈嘿嘿嘿'
       },
       username: this.$store.state.user.user
@@ -29,6 +30,10 @@ export default {
       readNewDict()
       .then(res => {
         this.data = res.data
+        this.$nextTick(() => {
+          const title = document.getElementsByClassName('dict-msg-title-only')
+            this.$set(this.data, 'title', title[0].innerHTML)
+        })
       })
     },
     redirect(e) {
@@ -37,7 +42,7 @@ export default {
     }
   },
   created () {
-    // this.readDict()
+    this.readNewDict()
   }
 }
 </script>
@@ -47,6 +52,11 @@ export default {
   content: "·";
   margin: 0 0.4em;
   color: rgb(178, 186, 194);
+}
+
+.hidden {
+  height: 0;
+  visibility: hidden;
 }
 
 .newest-dict {
@@ -59,7 +69,7 @@ export default {
   }
 }
 .title {
-  display: block;
+  display: inline-block;
   line-height: 23px;
   font-size: 1.167em;
   font-weight: 700;

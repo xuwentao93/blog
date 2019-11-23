@@ -1,8 +1,7 @@
 <template>
   <div class='dict-list-container'>
     <div class='dict-list' v-for='dict in urlList' :key='dict.url' @click='redirect(dict.url)'>
-      <div v-html='dict.text' class='hidden'></div>
-      <div>{{ dict.url }}</div>
+      <div>{{ dict.time }}</div>
       <div class='title'>{{ dict.title }}</div>
     </div>
     <el-button @click='test'>fdfd</el-button>
@@ -28,14 +27,7 @@ export default {
       })
       .then(res => {
         this.urlList = res.data
-        this.$nextTick(() => {
-          const title = document.getElementsByClassName('dict-msg-title-only')
-          for (let i =0; i < title.length; i++) {
-            // this.urlList[i].title = title[i].innerHTML
-            this.$set(this.urlList[i], 'title', title[i].innerHTML)
-          }
-          console.log(this.urlList)
-        })
+        console.log(this.urlList)
       })
     },
     test() {

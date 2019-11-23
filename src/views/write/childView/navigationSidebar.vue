@@ -1,7 +1,7 @@
 <template>
   <div class="title">
     <div class="upload">
-      <el-button type="primary" @click="save">保存</el-button>
+      <el-button type="primary" @click='save'>保存</el-button>
       <el-button type="success" @click="upload">发布</el-button>
     </div>
     <input type="text" v-model="title" placeholder="请输入文章标题..." spellcheck="false"/>
@@ -22,15 +22,21 @@ export default {
   },
   data () {
     return {
-      title: ''
+      title: '',
+      type: 'essay'
     }
   },
   methods: {
     save() {
+      this.type = 'essay'
+      if(this.$store.state.user.user === 'piedaochuan') {
+        let typeCheck = confirm('是否要转成日记形式?')
+        if (typeCheck) this.type = 'dictionary'
+      }
       save({
-        type: 'dictionary',
+        type: this.type,
         username: this.$store.state.user.user,
-        title: `<div class='dict-msg-title-only'>${this.title}</div>`,
+        title: this.title,
         msg: this.msg
       })
       .then(res => {
@@ -39,12 +45,17 @@ export default {
       .catch(error => console.log('save error: ' + error))
     },
     upload() {
+      this.type = 'essay'
+      if (this.$store.state.user.user === 'piedaochuan') {
+        let typeCheck = confirm('是否要转成日记形式?')
+        if (typeCheck) this.type = 'dictionary'
+      }
       let ifHandIn = confirm('确认要上传吗')
       if (!ifHandIn) return
       upload({
-        type: 'dictionary',
+        type: this.type,
         username: this.$store.state.user.user,
-        title: `<div class='dict-msg-title-only'>${this.title}</div>`,
+        title: this.title,
         msg: this.msg
       })
       .then(res => {
@@ -65,6 +76,7 @@ export default {
 .title {
   padding: 0 20px;
   border-bottom: 1px solid #eee;
+  background: #fff;
   overflow: hidden; // 防止内部浮动元素引起的父元素高度坍塌.
   .upload {
     float: right;
@@ -85,6 +97,7 @@ export default {
     font-size: 22px;
     font-weight: 700;
     outline: none;
+    background: transparent
   }
   .tools {
     display: inline-block;

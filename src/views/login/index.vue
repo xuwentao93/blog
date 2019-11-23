@@ -84,6 +84,7 @@ export default {
                 username: res.data.username,
               }
               this.setUser(response.username)
+              this.$router.push('/')
               // this.$router.push(this.next)
             }
           })
@@ -91,15 +92,15 @@ export default {
       }
     }
    },
-   beforeRouteEnter(to, from, next) {
-     next(vm => {
-       vm.next = from.fullPath
-     })
-   },
+  //  beforeRouteEnter(to, from, next) {
+  //    next(vm => {
+  //      vm.next = from.fullPath
+  //    })
+  //  },
    mounted() {
-     this.$router.beforeEach(((to, from, next) => {
-       console.log(from)
-     }))
+    //  this.$router.beforeEach(((to, from, next) => {
+    //    console.log(from)
+    //  }))
    }
 };
 </script>

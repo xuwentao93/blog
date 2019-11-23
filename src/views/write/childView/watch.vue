@@ -17,7 +17,13 @@ export default {
   },
   methods: {
     test() {
-      console.log('test')
+      try {
+        const a = 1
+        a = 2
+      } catch(e) {
+        console.log(e)
+      }
+      console.log(this.$store.state.user.user === 'piedaochuan')
     },
     consoleRange() {
       const selection = window.getSelection()
@@ -31,5 +37,6 @@ export default {
 <style scoped>
   .view {
     padding: 30px;
+    background: #fff;
   }
 </style>

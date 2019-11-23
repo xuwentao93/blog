@@ -57,7 +57,7 @@ input {
 
 /*定义滑块 内阴影+圆角*/
 ::-webkit-scrollbar-thumb {
-  height: 30px;
+  /* max-height: 30px; */
   border-radius: 10px;
   background-color: #d1d1d1;
 }
