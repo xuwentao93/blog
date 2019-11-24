@@ -4,7 +4,10 @@
       <el-button type="primary" @click='save'>保存</el-button>
       <el-button type="success" @click="upload">发布</el-button>
     </div>
-    <input type="text" v-model="title" placeholder="请输入文章标题..." spellcheck="false"/>
+    <input class='title-input' v-model="title" placeholder="请输入文章标题..." spellcheck="false"/>
+    <el-select v-model='type'>
+      <el-option v-for='type in essayType' :key='type.type' :value='type.type' :label='type.label'></el-option>
+    </el-select>
     <div class="tools">
       <i class="fa fa-bold"></i>
       <i class="fa fa-link"></i>
@@ -16,6 +19,7 @@
 
 <script>
 import { save, upload } from '@/api/file'
+import { essayType } from '@/config'
 export default {
   props: {
     msg: String
@@ -23,15 +27,15 @@ export default {
   data () {
     return {
       title: '',
-      type: 'essay'
+      type: '',
+      essayType
     }
   },
   methods: {
     save() {
-      this.type = 'essay'
-      if(this.$store.state.user.user === 'piedaochuan') {
-        let typeCheck = confirm('是否要转成日记形式?')
-        if (typeCheck) this.type = 'dictionary'
+      if (this.type === '') {
+        alert('请选择类型!')
+        return
       }
       save({
         type: this.type,
@@ -45,10 +49,13 @@ export default {
       .catch(error => console.log('save error: ' + error))
     },
     upload() {
-      this.type = 'essay'
-      if (this.$store.state.user.user === 'piedaochuan') {
-        let typeCheck = confirm('是否要转成日记形式?')
-        if (typeCheck) this.type = 'dictionary'
+      if (this.type === '') {
+        alert('请选择类型!')
+        return
+      }
+      if (this.title === '') {
+        alert('标题不能位空!')
+        return
       }
       let ifHandIn = confirm('确认要上传吗')
       if (!ifHandIn) return
@@ -74,6 +81,7 @@ export default {
   cursor: pointer;
 }
 .title {
+  height: 70px;
   padding: 0 20px;
   border-bottom: 1px solid #eee;
   background: #fff;
@@ -87,17 +95,19 @@ export default {
       clear: both;
     }
   }
-  input {
+  .title-input {
     display: inline-block;
     padding: 20px 0;
     width: 30%;
-    margin-right: 10%;
     border-width: 0;
     font-family: Monaco, Menlo, Ubuntu Mono, Consolas, source-code-pro, monospace;
     font-size: 22px;
     font-weight: 700;
     outline: none;
     background: transparent
+  }
+  .el-select {
+    margin: 0 40px;
   }
   .tools {
     display: inline-block;

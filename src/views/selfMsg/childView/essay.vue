@@ -1,7 +1,5 @@
 <template>
-  <div class='essay-list'>
-    <essay-list type='all'></essay-list>
-  </div>
+  <essay-list type='all' :isSave='true'></essay-list>
 </template>
 
 <script>
@@ -13,9 +11,6 @@ export default {
 }
 </script>
 
-<style scoped>
-.essay-list {
-  grid-row: 2 / 3;
-  grid-column: 1 / 2;
-}
+<style scoped lang='scss'>
+
 </style>

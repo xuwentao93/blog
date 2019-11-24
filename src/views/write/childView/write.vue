@@ -1,5 +1,5 @@
 <template>
-  <div class="write" tabindex='0' ref='write' contenteditable='true' @input='write' spellcheck="false"></div>
+  <div class="write" tabindex='0' ref='write' contenteditable='true' spellcheck="false" @input='write'></div>
 </template>
 
 <script>
@@ -17,20 +17,25 @@ export default {
       const text = this.$refs.write.innerHTML
       this.$emit('changeMsg', text)
     },
+    cancelDefaultStyle(event) {
+      event.stopPropagation()
+      event.preventDefault()
+      let text = ''
+      text = event.clipboardData ? event.clipboardData.getData('text/plain')
+      : event.dataTransfer.getData('text/plain')
+      document.execCommand('insertText', false, text)
+    },
     pasteDefaultStyleCancle() { // 取消文本粘贴后出现默认样式, 这个代码是copy的, 还要学习下.
       const write = this.$refs.write
-      write.addEventListener("paste", e => {
-        e.stopPropagation()
-        e.preventDefault()
-        let text = '', event = (e.originalEvent || e)
-        if (event.clipboardData && event.clipboardData.getData)
-        text = event.clipboardData.getData('text/plain')
-        else if (window.clipboardData && window.clipboardData.getData)
-        text = window.clipboardData.getData('Text')
-        if (document.queryCommandSupported('insertText'))
-          document.execCommand('insertText', false, text)
-         else document.execCommand('paste', false, text)
-      });
+      write.addEventListener("paste", this.cancelDefaultStyle)
+      // write.addEventListener('drop', this.cancelDefaultStyle)
+    },
+    test() {
+      // const write = this.$refs.write
+      // const selection = window.getSelection()
+      // let range = selection.getRangeAt(0).commonAncestorContainer
+      // console.log(range)
+      // console.log(this.msg[range.startOffset])
     }
   },
   mounted() {
@@ -56,7 +61,7 @@ export default {
       background: #f8f9fa;
     }
   }
-
+  .write ::selection,
   ::selection {
     background: rgb(213, 232, 252);
   }

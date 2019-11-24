@@ -22,25 +22,35 @@
       <router-link class="register-button" v-if='user === null' to='/register'>
         注册
       </router-link>
-      <div class="username" v-if='user !== null'>你好,{{user}}</div>
+      <div class="username" v-else @click='toSelfMsg'>你好,{{user}}</div>
     </div>
-    <router-view></router-view>
+    <div class="main">
+      <router-view></router-view>
+      <decoration-home></decoration-home>
+    </div>
   </div>
 </template>
 
 <script>
 import selfInput from "@/components/selfInput"
 import { menus } from '@/config'
+import decorationHome from "../home/childView/decoration"
 export default {
   components: {
     // today,
     // carouselContent,
-    selfInput
+    selfInput,
+    decorationHome,
   },
   data() {
     return {
       menus,
       user: this.$store.state.user.user
+    }
+  },
+  methods: {
+    toSelfMsg() {
+      this.$router.push('/selfMsg')
     }
   }
 };
@@ -152,10 +162,8 @@ a {
       background: #49f;
     }
   }
-  .register-button {
-    &:hover {
-      background: #899;
-    }
+  .register-button:hover {
+    background: #899;
   }
   .username {
     position: absolute;
@@ -164,6 +172,10 @@ a {
     line-height: 52px;
     text-align: center;
     color: #49f;
+    cursor: pointer;
+    &:hover {
+      color: #7cf
+    }
   }
 }
 
@@ -174,6 +186,8 @@ a {
   grid-template-rows: 300px 1fr;
   grid-row-gap: 20px;
   grid-column-gap: 20px;
+  width: calc(84% - 16px);
+  height: inherit;
   margin: 0 8%;
   padding: 20px;
   // height: 1200px;
@@ -181,7 +195,6 @@ a {
 </style>
 
 <style lang='scss'>
-
 .self-input-container {
   position: relative;
 }

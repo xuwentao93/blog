@@ -2,6 +2,7 @@
   <div class='newest-dict'>
     <h1>最新日记</h1>
     <p>
+      <span class='type point'>类型</span>
       <span class='theme point'>日记</span>
       <span class='username-time'>
         <span class='point'>徐文韬</span>
@@ -14,35 +15,30 @@
 </template>
 
 <script>
-import { readNewDict } from '@/api/file'
+import { readNewest } from '@/api/file'
 export default {
   data () {
     return {
-      data: {
-        time: '2019.11.21',
-        title: '今天哈哈哈哈嘿嘿嘿'
-      },
+      data: {},
       username: this.$store.state.user.user
     }
   },
   methods: {
-    readNewDict() {
-      readNewDict()
+    readNewest() {
+      readNewest({
+        type: 'dictionary',
+        username: 'piedaochuan'
+      })
       .then(res => {
         this.data = res.data
-        this.$nextTick(() => {
-          const title = document.getElementsByClassName('dict-msg-title-only')
-            this.$set(this.data, 'title', title[0].innerHTML)
-        })
       })
     },
     redirect(e) {
       this.$router.push(`/dictionary/${this.data.time}`)
-      console.log(e)
     }
   },
   created () {
-    this.readNewDict()
+    this.readNewest()
   }
 }
 </script>
@@ -60,6 +56,9 @@ export default {
 }
 
 .newest-dict {
+  .type {
+    color: #b71ed7
+  }
   .theme {
     color: #f06
   }

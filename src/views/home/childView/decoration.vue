@@ -16,30 +16,6 @@ export default {
     newestDicionary,
     goodEssay,
     goodRFC,
-  },
-  data () {
-    return {
-      data: '',
-      username: this.$store.state.user.user
-    }
-  },
-  methods: {
-    readDict() {
-      readDict({
-        username: this.username
-      })
-      .then(res => {
-        res.data.forEach((item, index) => {
-          // if (item.url === this.$route.params.id) {
-            this.data = res.data[index].text
-          // }
-        })
-        console.log(res.data)
-      })
-    }
-  },
-  created () {
-    this.readDict()
   }
 }
 </script>
@@ -51,7 +27,7 @@ export default {
   background: #fff;
 }
 .dict-msg-title-only {
-  grid-row-start: 1;
-  grid-row-end: 3;
+  grid-row: 1 / 3;
+  grid-column: 2 / 3;
 }
 </style>

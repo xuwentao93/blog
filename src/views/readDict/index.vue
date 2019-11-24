@@ -23,9 +23,7 @@ export default {
   },
   methods: {
     readDict() {
-      readDict({
-        username: this.username
-      })
+      readDict()
       .then(res => {
         res.data.forEach((item, index) => {
           if (item.time === this.$route.params.id.slice(-10)) {

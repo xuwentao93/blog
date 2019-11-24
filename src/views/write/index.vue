@@ -29,7 +29,8 @@ export default {
     } 
   },
   mounted() {
-    if(this.$store.state.user.user !== 'piedaochuan') {
+    console.log(this.$store.state.user.user)
+    if(!this.$store.state.user.user) {
       alert(404)
       this.$router.push('/login')
     }
@@ -46,10 +47,11 @@ export default {
 <style lang="scss">
 .write,
 .view {
-  overflow: auto;
+  overflow-y: auto;
   width: 50%;
-  min-height: calc(100vh - 142px);
+  height: calc(100vh - 212px);
   font-size: 1.167em;
   white-space: pre-wrap; // 让多余的空格不会消失。
+  
 }
 </style>

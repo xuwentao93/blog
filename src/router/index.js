@@ -30,6 +30,24 @@ export default new router({
         path: '/dictionary/:id',
         name: 'readDict',
         component: () => import('@/views/readDict')
+      },
+      {
+        path: '/selfMsg',
+        name: 'selfMsg',
+        redirect: '/selfMsg/basicMsg',
+        component: () => import('@/views/selfMsg'),
+        children: [
+          {
+            path: '/selfMsg/basicMsg',
+            name: 'basicMsg',
+            component: () => import('@/views/selfMsg/childView/basicMsg')
+          },
+          {
+            path: '/selfMsg/essay',
+            name: 'selfMsgEssay',
+            component: () => import('@/views/selfMsg/childView/essay')
+          }
+        ]
       }
     ]
   },

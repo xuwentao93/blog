@@ -17,4 +17,12 @@ request.interceptors.request.use(config => {
     console.log(err)
   })
 
+// request.interceptors.response.use(config => {
+//   try {
+//     config.data = qs.parse(config.data)
+//   } catch(error) {
+//     console.log('can\'t parse resonse data, maybe it\'s already be parsed')
+//   }
+// })
+
   export default request
