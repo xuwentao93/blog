@@ -1,21 +1,23 @@
 <template>
-  <div>
-    <carousel-content></carousel-content>
-    <essay-list></essay-list>
+  <div class='container'>
+    <router-view></router-view>
+    <right-sidebar></right-sidebar>
   </div>
 </template>
 
 <script>
-import carouselContent from "./childView/carousel"
-import essayList from './childView/essay'
-
+import rightSidebar from "./childView/rightSidebar"
 export default {
   components: {
-    carouselContent,
-    essayList
+    rightSidebar
   }
 }
 </script>
 
 <style scoped lang='scss'>
+.container {
+  display: flex;
+  padding-top: 30px;
+  margin: 0 9%;
+}
 </style>

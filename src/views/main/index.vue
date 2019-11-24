@@ -24,23 +24,16 @@
       </router-link>
       <div class="username" v-else @click='toSelfMsg'>你好,{{user}}</div>
     </div>
-    <div class="main">
       <router-view></router-view>
-      <decoration-home></decoration-home>
-    </div>
   </div>
 </template>
 
 <script>
 import selfInput from "@/components/selfInput"
 import { menus } from '@/config'
-import decorationHome from "../home/childView/decoration"
 export default {
   components: {
-    // today,
-    // carouselContent,
-    selfInput,
-    decorationHome,
+    selfInput
   },
   data() {
     return {
@@ -177,20 +170,6 @@ a {
       color: #7cf
     }
   }
-}
-
-.main {
-  //主要内容样式布局
-  display: grid;
-  grid-template-columns: 70% 30%;
-  grid-template-rows: 300px 1fr;
-  grid-row-gap: 20px;
-  grid-column-gap: 20px;
-  width: calc(84% - 16px);
-  height: inherit;
-  margin: 0 8%;
-  padding: 20px;
-  // height: 1200px;
 }
 </style>
 

@@ -4,17 +4,12 @@
       <div class="dict-msg-title-only">{{ data.title }}</div>
       <div v-html='data.text'></div>
     </div>
-    <decoration-read></decoration-read>
   </div>
 </template>
 
 <script>
-import { readDict } from '@/api/file'
-import decorationRead from '@/views/home/childView/decoration'
+import { readEssay } from '@/api/file'
 export default {
-  components: {
-    decorationRead
-  },
   data() {
     return {
       data: '',
@@ -22,8 +17,8 @@ export default {
     }
   },
   methods: {
-    readDict() {
-      readDict()
+    readEssay() {
+      readEssay()
       .then(res => {
         res.data.forEach((item, index) => {
           if (item.time === this.$route.params.id.slice(-10)) {
@@ -35,7 +30,7 @@ export default {
     }
   },
   created() {
-    this.readDict()
+    this.readEssay()
   }
 }
 </script>

@@ -12,24 +12,32 @@ export default new router({
     component: () => import('@/views/main'),
     children: [
       {
-        path: '/home',
-        name: 'home',
-        component: () => import('@/views/home')
-      },
-      {
-        path: '/dictionary',
-        name: 'dictionary',
-        component: () => import('@/views/dictionary')
+        path: '/container',
+        name: 'container',
+        redirect: '/home',
+        component: () => import('@/views/home'), // 主页面, 包含轮播图和文章筛选.
+        children: [
+          {
+            path: '/home',
+            name: 'home',
+            component: () => import('@/views/home/childView')
+          },
+          {
+            path: '/dictionary',
+            name: 'dictionary',
+            component: () => import('@/views/dictionary')
+          },
+          {
+            path: '/readEssay/:id',
+            name: 'readEssay',
+            component: () => import('@/views/readEssay')
+          },
+        ]
       },
       {
         path: '/write',
         name: 'write',
         component: () => import('@/views/write')
-      },
-      {
-        path: '/dictionary/:id',
-        name: 'readDict',
-        component: () => import('@/views/readDict')
       },
       {
         path: '/selfMsg',

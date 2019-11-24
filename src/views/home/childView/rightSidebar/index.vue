@@ -8,9 +8,9 @@
 
 <script>
 import { readDict } from '@/api/file'
-import goodRFC from './childView/goodRFC'
-import goodEssay from './childView/goodEssay'
-import newestDicionary from './childView/newestDictionary'
+import goodRFC from '../goodRFC'
+import goodEssay from '../goodEssay'
+import newestDicionary from '../newestDictionary'
 export default {
   components: {
     newestDicionary,
@@ -20,14 +20,13 @@ export default {
 }
 </script>
 
-<style lang='scss'>
-.decoration>div{
+<style lang='scss' scoped>
+.decoration {
+  max-width: 330px;
+}
+.decoration > div{
   padding: 10px;
   margin-bottom: 16px;
   background: #fff;
-}
-.dict-msg-title-only {
-  grid-row: 1 / 3;
-  grid-column: 2 / 3;
 }
 </style>

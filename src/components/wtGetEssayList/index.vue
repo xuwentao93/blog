@@ -95,6 +95,8 @@ a:hover {
 }
 
 .dict-list-container {
+  width: 700px;
+  margin: 0 10%;
   padding-top: 25px;
   background: #f4f5f5;
 }

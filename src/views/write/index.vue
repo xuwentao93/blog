@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import navigationSidebar from './childView/navigationSidebar' // 导航栏
-import writeContainer from './childView/write' // 编辑框
+import navigationSidebar from './childView/navigationSidebar' // 导航栏.
+import writeContainer from './childView/write' // 编辑框.
 import watchContainer from './childView/watch' // 可视区域.
 export default {
   components: {

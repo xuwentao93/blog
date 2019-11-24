@@ -1,5 +1,5 @@
 <template>
-  <dict-list type='dict'></dict-list>
+  <dict-list type='dictionary'></dict-list>
 </template>
 
 <script>
