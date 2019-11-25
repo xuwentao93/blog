@@ -7,7 +7,6 @@
 </template>
 
 <script>
-import { readDict } from '@/api/file'
 import goodRFC from '../goodRFC'
 import goodEssay from '../goodEssay'
 import newestDicionary from '../newestDictionary'

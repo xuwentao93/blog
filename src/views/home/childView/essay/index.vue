@@ -14,8 +14,5 @@ export default {
 </script>
 
 <style scoped>
-.essay-list {
-  grid-row: 2 / 3;
-  grid-column: 1 / 2;
-}
+
 </style>

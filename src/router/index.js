@@ -28,7 +28,7 @@ export default new router({
             component: () => import('@/views/dictionary')
           },
           {
-            path: '/readEssay/:id',
+            path: '/essay/:id/:id/:id', // 3个id 分别对应用户名, 类型, 文章名字.
             name: 'readEssay',
             component: () => import('@/views/readEssay')
           },

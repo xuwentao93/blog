@@ -1,57 +1,55 @@
 <template>
   <div class='dict-container'>
     <div class='dict'>
-      <div class="dict-msg-title-only">{{ data.title }}</div>
-      <div v-html='data.text'></div>
+      <div class="dict-msg-title-only">
+        <span class='title'>{{ essay.title }}</span>
+        <span class='time'>{{ essay.time }}</span>
+      </div>
+      <div v-html='essay.text'></div>
     </div>
   </div>
 </template>
 
 <script>
-import { readEssay } from '@/api/file'
+import { getEssayText } from '@/api/file'
 export default {
   data() {
     return {
-      data: '',
+      essay: '',
       username: this.$store.state.user.user
     }
   },
   methods: {
-    readEssay() {
-      readEssay()
+    getEssayText() {
+      getEssayText({
+        url: `..${this.$route.path}`
+      })
       .then(res => {
-        res.data.forEach((item, index) => {
-          if (item.time === this.$route.params.id.slice(-10)) {
-            this.data = res.data[index]
-          }
-        })
         console.log(res.data)
+        this.essay = res.data
       })
     }
   },
   created() {
-    this.readEssay()
+    console.log(this.$route.path)
+    this.getEssayText()
   }
 }
 </script>
 
 <style scoped>
 .dict-container {
-  display: grid;
-  grid-template-columns: 70% 30%;
-  grid-row-gap: 20px;
-  grid-column-gap: 20px;
   margin: 0 8%;
   padding: 20px;
 }
 
 .dict {
   position: relative;
-  left: 150px;
   width: 700px;
   padding: 20px;
   line-height: 23px;
   font-size: 1.167em;
+  font-family: Monaco, Menlo, Ubuntu Mono, Consolas, source-code-pro, monospace;
   background: #fff;
 }
 .test {
@@ -64,8 +62,14 @@ export default {
   display: block;
   width: 100%;
   margin-bottom: 40px;
-  font-size: 30px;
-  font-weight: 700;
   text-align: center;
+  .title {
+    font-size: 30px;
+    font-weight: 700;
+  }
+  .time {
+    position: relative;
+    left: 20px;
+  }
 }
 </style>

@@ -1,6 +1,7 @@
 <template>
   <div class='dict-list-container'>
-    <div class='dict-list' v-for='essay in essayList' :key='essay.url' @click='redirect(essay.url)'>
+    <div class='dict-list' v-for='essay in essayList' :key='essay.url' 
+    @click='redirect(essay.url)'>
       <p>
         <span class='type point'>类型</span>
         <span class='theme point'>{{ essay.type }}</span>
@@ -37,11 +38,15 @@ export default {
       username: this.$store.state.user.user
     }
   },
-  methods: {
-    redirect(id) {
-      this.$router.push(`/${type}/${id}`)
+  methods: { // 跳转到相应路由
+    redirect(url) {
+      // console.log(username)
+      // console.log(type)
+      // console.log(title)
+      url = url.slice(3)
+      this.$router.push(`${url}`)
     },
-    read() {
+    read() { // 读取文章.
       let api = this.isSave ? readSave : readEssay
       api({
         username: this.username,
