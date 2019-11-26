@@ -61,6 +61,6 @@ export default {
   }
   .write ::selection,
   ::selection {
-    background: rgb(213, 232, 252);
+    background: #d5d8fc
   }
 </style>

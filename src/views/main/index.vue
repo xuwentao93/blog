@@ -28,6 +28,7 @@
         <p class='blogger'>WT PERSONAL BLOG</p>
         <p class='tips'>A website I want to share something and record my study path and life.</p>
       </div>
+
     </header>
 
     <router-view></router-view>
@@ -36,7 +37,7 @@
 
 <script>
 import { menus } from '@/config'
-import { log } from 'util'
+import wtAlert from '@/components/wtAlert'
 export default {
   data() {
     return {
@@ -51,9 +52,13 @@ export default {
       this.$router.push('/selfMsg')
     },
     borderTopStyleChange(number) {
-      this.menus[this.borderTopStyleController].borderTopColor = false
+      // this.menus[this.borderTopStyleController].borderTopColor = false
+      this.$set(this.menus[this.borderTopStyleController], 'borderTopColor', false)
+      for(let i =0; i < this.menus.length; i++) {
+        this.$set(this.menus[this.borderTopStyleController], 'borderTopColor', false)
+      }
       this.borderTopStyleController = number
-      this.menus[this.borderTopStyleController].borderTopColor = true
+      this.$set(this.menus[this.borderTopStyleController], 'borderTopColor', true)
     },
     changeHeight(bool) {
       this.miniHeight = bool
@@ -161,7 +166,7 @@ export default {
     transition: background-color .4s, color .4s;
     &:hover {
       background: #fff;
-      color: rgb(239, 82, 133);
+      color: #ef5285
     }
   }
   .username-list {

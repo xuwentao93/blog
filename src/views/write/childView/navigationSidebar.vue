@@ -1,13 +1,15 @@
 <template>
   <div class="title">
-    <wt-alert theme='warning'>{{ errorMsg }}</wt-alert>
+    <wt-carousel theme='Warning'>
+      <span>{{ errorMsg }}</span>
+    </wt-carousel>
     <div class="upload">
       <el-button type="primary" @click='save'>保存</el-button>
       <el-button type="success" @click="upload">发布</el-button>
     </div>
     <input class='title-input' v-model="title" placeholder="请输入文章标题..." spellcheck="false"/>
-    <el-select v-model='type'>
-      <el-option v-for='type in essayType' :key='type.type' :value='type.type' :label='type.label'></el-option>
+    <el-select v-model='type' placeholder="choose essay type">
+      <el-option v-for='type in essayType' :key='type.type' :value='type.type'></el-option>
     </el-select>
     <div class="tools">
       <i class="fa fa-bold"></i>
@@ -22,10 +24,10 @@
 import { save, upload } from '@/api/file'
 import { test } from '@/api/test'
 import { essayType } from '@/config'
-import wtAlert from '@/components/wtAlert'
+import wtCarousel from '@/components/wtAlert'
 export default {
   components: {
-    wtAlert
+    wtCarousel
   },
   props: {
     msg: String

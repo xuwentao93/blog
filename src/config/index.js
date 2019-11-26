@@ -36,23 +36,18 @@ export const selfMsgMenuList = [
 
 export const essayType = [
   {
-    type: 'dictionary',
-    label:'日记'
+    type: 'web'
   },
   {
-    type: 'learn',
-    label:'学习'
+    type: 'life'
   },
   {
-    type: 'life',
-    label:'生活'
+    type: 'game'
   },
   {
-    type: 'game',
-    label:'游戏'
+    type: 'learn'
   },
   {
-    type: 'web',
-    label:'前端动态'
+    type: 'dictionray'
   }
 ]

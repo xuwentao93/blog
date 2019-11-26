@@ -47,7 +47,7 @@ export default {
 .point:after {
   content: "·";
   margin: 0 0.4em;
-  color: rgb(178, 186, 194);
+  color:  #b2bac2;
 }
 
 .hidden {

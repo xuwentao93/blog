@@ -55,7 +55,7 @@ export default {
   height: 40px;
   border: 1px solid #e4e7eb;
   border-radius: 2px;
-  background: rgb(247, 249, 250);
+  background: #f7f9fa;
   .cube {
     position: relative;
     left: -1px;
@@ -93,7 +93,7 @@ export default {
   height: 0;
   width: 15px;
   border: 0px;
-  border-top: 2.5px solid rgb(114, 120, 125);
+  border-top: 2.5px solid #798085;
 }
 .self-angel {
   position: relative;
@@ -102,8 +102,8 @@ export default {
   bottom: 0.5px;
   width: 9px;
   height: 9px;
-  border-top: 2px solid rgb(114, 120, 125);
-  border-right: 2px solid rgb(114, 120, 125);
+  border-top: 2px solid #798085;
+  border-right: 2px solid #798085;
   border-radius: 2px;
   transform: rotate(45deg);
 }

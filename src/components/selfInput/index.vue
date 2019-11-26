@@ -40,7 +40,7 @@ export default {
   width: 80%;
   height: 28px;
   padding: 6px 8px;
-  border: 1px solid rgb(209, 213, 218);
+  border: 1px solid #d1d5da;
   border-radius: 3px;
   background: #fafbfc;
   font-family: -apple-system;
