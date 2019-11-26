@@ -1,185 +1,210 @@
 <template>
   <div class="homepage">
-    <div class="navigation-bar">
-      <div class="title">
-        <span class="name">徐文韬</span>
-        <span class="theme">的个人博客</span>
-      </div>
-    </div>
 
-    <div class="menu">
-      <ul class="list">
-        <li v-for="menu in menus" :key="menu.content" class="menu-link">
-          <router-link :to="menu.url">{{menu.content}}</router-link>
-        </li>
-      </ul>
-      <self-input>
-        <i class="fa fa-search"></i>
-      </self-input>
-      <router-link class="login-button" v-if='user === null' to='/login'>
-        登录
-      </router-link>
-      <router-link class="register-button" v-if='user === null' to='/register'>
-        注册
-      </router-link>
-      <div class="username" v-else @click='toSelfMsg'>你好,{{user}}</div>
-    </div>
-      <router-view></router-view>
+    <header class="header" :class='{ miniHeight }'>
+      <div class="cover" :class='{ miniHeight }'></div>      
+      <div class='navigation-sidebar'>
+        <div class="title">BARUNKA.</div>
+        <div class="menu">
+          <ul class="list">
+            <li v-for="(menu, index) in menus" :key="menu.content" class="menu-link" 
+            :class='{ borderTopColor:menu.borderTopColor }' @click='borderTopStyleChange(index)'>
+              <router-link :to="menu.url" class='link'>{{ menu.content }}</router-link>
+            </li>
+          </ul>
+          <router-link class="login-button" v-if='user === null' to='/login'>
+            <span>sign in</span>
+          </router-link>
+          <router-link class="register-button" v-if='user === null' to='/register'>
+            <span>sign up</span>
+          </router-link>
+          <div class="username-list" v-else @click='toSelfMsg'>
+            <span>WELCOME!</span>
+            <span class='username'>{{ user }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="brief" :class="{ hidden: miniHeight}">
+        <p class='blogger'>WT PERSONAL BLOG</p>
+        <p class='tips'>A website I want to share something and record my study path and life.</p>
+      </div>
+    </header>
+
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import selfInput from "@/components/selfInput"
 import { menus } from '@/config'
+import { log } from 'util'
 export default {
-  components: {
-    selfInput
-  },
   data() {
     return {
       menus,
-      user: this.$store.state.user.user
+      user: this.$store.state.user.user,
+      borderTopStyleController: 0,
+      miniHeight: false
     }
   },
   methods: {
     toSelfMsg() {
       this.$router.push('/selfMsg')
+    },
+    borderTopStyleChange(number) {
+      this.menus[this.borderTopStyleController].borderTopColor = false
+      this.borderTopStyleController = number
+      this.menus[this.borderTopStyleController].borderTopColor = true
+    },
+    changeHeight(bool) {
+      this.miniHeight = bool
     }
+  },
+  mounted() {
+    if (this.$route.name === 'write') this.changeHeight(true)
+    this.$router.beforeEach((to, from, next) => { // 用路由去修改height, 是写文章页面就小一点.
+      if (to.name === 'write') this.changeHeight(true)
+      else this.changeHeight(false)
+      next()
+    })
   }
-};
+  
+}
 </script>
 
 <style scoped lang='scss'>
+// a {
+//   color: #fff;
+// }
+
 .homepage {
   background: #f4f5f5;
 }
-a {
-  //some basic modify
-  color: #fff;
-}
-.fa-search {
+
+.cover {
   position: absolute;
-  right: 10px;
-  top: 21px;
-  color: #99a;
+  width: 100%;
+  height: 500px;
+  background: #000;
+  opacity: 0.25;
+  transition: height .8s;
 }
 
-.navigation-bar {
-  //顶部样式
+.header {
+  position: relative; // 用于子元素进行定位.
   width: 100%;
-  height: 90px;
-  z-index: 999;
-  background: #49f;
-  .title {
-    width: 350px;
-    margin: 0 auto;
-    text-align: center;
-    line-height: 90px;
-    color: #fff;
-    font-family: "time";
-    .name {
-      font-size: 45px;
-      transition: letter-spacing 1.5s;
-    }
-    .theme {
-      position: relative;
-      left: 16px;
-      font-size: 22px;
-      transition: opacity 1.5s, left 1.5s;
-    }
-    &:hover {
-      width: 500px;
+  height: 500px;
+  font-family: "Roboto Condensed", Helvetica, Arial, sans-serif;
+  background: url(../../assets/imgs/home/carousel2.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transition: height .8s;
+  .navigation-sidebar {
+    position: relative;
+    height: 60px;
+    width: 100%;
+    padding: 0 8% 0 12%;
+    z-index: 999;
+    .title {
+      float: left;
+      height: 60px;
+      line-height: 60px;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      color: #fff;
       cursor: pointer;
-      .name {
-        letter-spacing: 10px;
-      }
-      .theme {
-        left: 30px;
-        opacity: 0.5;
+      transition: transform .4s;
+      &:hover {
+        transform: translateY(3px);
       }
     }
   }
 }
 
 .menu {
-  //菜单栏布局
   display: flex;
   align-items: center;
-  height: 52px;
-  width: 100%;
-  line-height: 52px;
-  z-index: 999;
-  background: #000;
-  color: #fff;
+  float: right;
+  line-height: 60px;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 1px;
   .list {
-    width: 700px;
-    height: inherit;
-    margin-left: 20%;
-    margin-right: 20px;
-    text-align: center;
+    height: 60px;
     .menu-link {
       display: inline-block;
-      width: 75px;
-      height: 52px;
-      line-height: 52px;
-      font-size: 17px;
-      vertical-align: top;
+      padding: 0 16.5px;
+      height: 60px;
+      border-top: 2px solid transparent;
+      transition: border .2s;
       cursor: pointer;
-      transition: background-color .6s;
-      a {
-        display: block;
-        width: 75px;
-        height: 52px;
+      .link {
+        display: inline-block;
       }
       &:hover {
-        border-top: 4px solid #f77825;
-        line-height: 44px;
-        color: #49f;
-        background: #fff;
+        border-top-color: #fff;
       }
+    }
+    .borderTopColor {
+      border-top-color: #fff ;
     }
   }
   .login-button,
   .register-button {
-    display: block;
-    width: 75px;
-    text-align: center;
-    height: inherit;
-    cursor: pointer;
-    transition: background-color .6s;
-  }
-  .login-button {
-    margin-left: 80px;
-    color: #f00;
+    display: inline-block;
+    height: 36px;
+    margin-right: 15px;
+    padding: 0 16.5px;
+    border: 1px solid #fff;
+    line-height: 36px;
+    transition: background-color .4s, color .4s;
     &:hover {
-      background: #49f;
+      background: #fff;
+      color: rgb(239, 82, 133);
     }
   }
-  .register-button:hover {
-    background: #899;
-  }
-  .username {
-    position: absolute;
-    right: 20px;
-    height: 52px;
-    line-height: 52px;
-    text-align: center;
-    color: #49f;
-    cursor: pointer;
-    &:hover {
-      color: #7cf
+  .username-list {
+    margin-left: 25px;
+    border-top: 2px solid transparent;
+    line-height: 60px;
+    color: #fff;
+    .username {
+      display: inline-block;
+      margin-left: 15px;
+      cursor: pointer;
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
+  
 }
-</style>
 
-<style lang='scss'>
-.self-input-container {
-  position: relative;
+.brief {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 700px;
+  color: #fff;
+  transform: translate(-50%, -50%);
+  letter-spacing: 1px;
+  .blogger {
+    width: 560px;
+    margin: 0 auto;
+    font-size: 50px;
+    font-weight: 700;
+    font-family: "Roboto Condensed", Helvetica, Arial, sans-serif;
+  }
+  .tips {
+    font-size: 20px;
+  }
 }
-.homepage .self-input {
-  width: 220px;
-  height: 20px;
-  vertical-align: middle;
+
+.miniHeight {
+  height: 60px;
+}
+.hidden{
+  display: none;
 }
 </style>

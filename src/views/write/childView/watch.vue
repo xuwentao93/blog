@@ -2,11 +2,16 @@
   <div class="view">
     <div v-html='msg'></div>
     <el-button @click='test' ref='test'>test button</el-button>
+    <wt-alert></wt-alert>
   </div>
 </template>
 
 <script>
+import wtAlert from '@/components/wt-alert'
 export default {
+  components: {
+    wtAlert
+  },
   props: {
     msg: String
   },

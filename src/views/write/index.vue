@@ -29,11 +29,11 @@ export default {
     } 
   },
   mounted() {
-    console.log(this.$store.state.user.user)
-    if(!this.$store.state.user.user) {
+    if (!this.$store.state.user.user) {
       alert(404)
       this.$router.push('/login')
     }
+    this.$emit('changeHeight')
   }
 } 
 </script>
@@ -49,7 +49,7 @@ export default {
 .view {
   overflow-y: auto;
   width: 50%;
-  height: calc(100vh - 212px);
+  height: calc(100vh - 132px);
   font-size: 1.167em;
   white-space: pre-wrap; // 让多余的空格不会消失。
   

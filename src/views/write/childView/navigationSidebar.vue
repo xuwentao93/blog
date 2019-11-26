@@ -1,5 +1,6 @@
 <template>
   <div class="title">
+    <wt-alert theme='warning'>{{ errorMsg }}</wt-alert>
     <div class="upload">
       <el-button type="primary" @click='save'>保存</el-button>
       <el-button type="success" @click="upload">发布</el-button>
@@ -19,8 +20,13 @@
 
 <script>
 import { save, upload } from '@/api/file'
+import { test } from '@/api/test'
 import { essayType } from '@/config'
+import wtAlert from '@/components/wtAlert'
 export default {
+  components: {
+    wtAlert
+  },
   props: {
     msg: String
   },
@@ -28,7 +34,8 @@ export default {
     return {
       title: '',
       type: '',
-      essayType
+      essayType,
+      errorMsg: '请选择类型'
     }
   },
   methods: {
@@ -71,7 +78,7 @@ export default {
       .catch(error => console.log('handIn error: ' + error))
     },
   }
-};
+}
 </script>
 
 <style scoped lang='scss'>
@@ -81,6 +88,7 @@ export default {
   cursor: pointer;
 }
 .title {
+  width: 100%;
   height: 70px;
   padding: 0 20px;
   border-bottom: 1px solid #eee;

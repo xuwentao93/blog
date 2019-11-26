@@ -1,16 +1,31 @@
 <template>
-  <div class='dict-list-container'>
-    <div class='dict-list' v-for='essay in essayList' :key='essay.url' 
+  <div class='essay-list-container'>
+    <div class='essay-list' v-for='essay in essayList' :key='essay.url' 
     @click='redirect(essay.url)'>
-      <p>
-        <span class='type point'>类型</span>
-        <span class='theme point'>{{ essay.type }}</span>
-        <span class='username-time'>
-        <span class='point'>{{ essay.username }}</span>
-        <span>{{ essay.time }}</span>
-        </span>
-      </p>
+      <span class='theme'>{{ essay.type }}</span>
       <div class='title'>{{ essay.title }}</div>
+      <div class='clear-float'>
+        <img src="../../assets/imgs/test.jpg" class='essay-img'>
+        <p class='essay-text'>
+          返回一个数字，其表示的是选区终点在 focusNode 中的位置偏移量。
+如果 focusNode 是文字节点，那么选区末尾未被选中的第一个字，在该文字节点中是第几个字（从0开始计），就返回它。
+如果 focusNode 是一个元素，那么返回的就是在选区末尾之后第一个节点之前的同级节点总数。
+isCollapsed返回一个数字，其表示的是选区终点在 focusNode 中的位置偏移量。
+如果 focusNode 是文字节点，那么选区末尾未被选中的第一个字，在该文字节点中是第几个字（从0开始计），就返回它。
+如果 focusNode 是一个元素，那么返回的就是在选区末尾之后第一个节点之前的同级节点总数。
+isCollapsed
+        </p>
+      </div>
+      <div class='author-time'>
+        <div class='user-info'>
+          <i class="fa fa-user"></i>
+          <span> {{ essay.username }}</span>
+        </div>
+        <div class='time-info'>
+          <i class="fa fa-clock-o"></i>
+          <span> {{ essay.time }}</span>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -55,19 +70,6 @@ export default {
       })
       .then(res => {
         this.essayList = res.data
-          const filter = {
-            learn: '学习',
-            life: '生活',
-            game: '游戏',
-            web: '前端动态',
-            dictionray: '日记'
-          }
-        this.essayList.forEach((item, index, array) => {
-          Object.keys(filter).forEach(type => {
-            if (item.type === type) array[index].type = filter[type]
-          })
-        })
-        console.log(res.data)
       })
       .catch(err => console.log(`err comes from weGetEssayList, api is ${api}, err is ${err}`))
     },
@@ -79,6 +81,11 @@ export default {
   },
   mounted() {
     this.read()
+  },
+  watch: {
+    type() { // 修改类型的时候重新调用接口.
+      this.read()
+    }
   }
 }
 </script>
@@ -95,42 +102,68 @@ export default {
   color: rgb(178, 186, 194);
 }
 
-a:hover {
-  text-decoration: underline
-}
-
-.dict-list-container {
-  width: 700px;
-  margin: 0 10%;
+.essay-list-container {
+  width: 100%;
+  min-width: 700px;
+  // margin: 0 10%;
   padding-top: 25px;
   background: #f4f5f5;
 }
 
 .title {
+  display: inline-block;
+  margin-bottom: 10px;
   font-size: 1.4rem;
   font-weight: 600;
-  font-family: -apple-system, system-ui, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Hiragino Sans GB
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Hiragino Sans GB;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
-.dict-list {
-  .type {
-    color: #b71ed7
-  }
-  .theme {
-    color: #f06
-  }
-  .username-time {
-    font-size: 13px;
-    color: #909090;
-  }
+.essay-list {
   width: 100%;
-  height: 112px;
+  height: 230px;
   padding: 18px 24px;
-  margin: 0 auto;
+  // margin: 10px 0;
   border: 1px solid #eee;
   background: #fff;
   cursor: pointer;
   // border-radius: 3px;
   // box-shadow: 1px 1px 1px;
+  &:hover {
+    background: #fafafa;
+  }
+  .theme {
+    color: #f06
+  }
+  .essay-img {
+    float: left;
+    display: block;
+    width: 180px;
+    height: 123px;
+  }
+  .essay-text {
+    position: relative;
+    left: 14px;
+    width: calc(100% - 200px);
+    height: 114px;
+    overflow: hidden;
+    text-overflow: ellipsis; // 溢出用省略号显示
+    word-break: break-all;
+    // white-space: nowrap; // 溢出不换行
+    margin: 0;
+  }
+}
+
+.author-time {
+  float: right;
+  font-size: 15px;
+  color: #909090;
+  .user-info,
+  .time-info {
+    display: inline-block;
+    margin: 20px 20px 0 0;
+  }
 }
 </style>

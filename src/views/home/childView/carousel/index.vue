@@ -32,7 +32,7 @@ export default {
           link:'https://www.baidu.com'
         },
         {
-          url:require('@/assets/imgs/carousel/6.jpeg'),
+          url:require('@/assets/imgs/carousel/6.jpg'),
           link:'https://www.baidu.com'
         }
       ]

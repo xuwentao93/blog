@@ -1,11 +1,11 @@
 <template>
   <div class='newest-dict'>
-    <h1>最新日记</h1>
+    <h1>newest dict</h1>
     <p>
-      <span class='type point'>类型</span>
-      <span class='theme point'>日记</span>
+      <span class='type point'>type</span>
+      <span class='theme point'>dictionary</span>
       <span class='username-time'>
-        <span class='point'>徐文韬</span>
+        <span class='point'>piedaochuan</span>
         <span>{{ data.time }}</span>
       </span>
     </p>
@@ -33,11 +33,11 @@ export default {
         this.data = res.data
       })
     },
-    redirect(e) {
+    redirect() {
       this.$router.push(`/essay/piedaochuan/dictionary/${this.data.time}`)
     }
   },
-  created () {
+  created() {
     this.readNewest()
   }
 }

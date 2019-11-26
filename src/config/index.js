@@ -3,31 +3,23 @@ export const USER = 'user'
 export const menus = [ // 首页的导航栏列表.
   {
     url: "/",
-    content: "首页"
-  },
-  {
-    url: "/learn",
-    content: "学习"
+    content: "HOME",
+    borderTopColor: true
   },
   {
     url: "/dictionary",
-    content: "日志"
+    content: "DICT",
+    borderTopColor: false
   },
   {
-    url: "/game",
-    content: "游戏"
-  },
-  {
-    url: "/web",
-    content: "前端动态"
-  },
-  {
-    url: "/life",
-    content: "生活"
+    url: "/topic",
+    content: "TOPIC",
+    borderTopColor: false
   },
   {
     url: '/write',
-    content: '写文章'
+    content: 'WRITING',
+    borderTopColor: false
   }
 ]
 

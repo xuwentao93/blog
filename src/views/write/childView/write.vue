@@ -1,16 +1,12 @@
 <template>
-  <div class="write" tabindex='0' ref='write' contenteditable='true' spellcheck="false" @input='write'></div>
+  <div class="write" tabindex='0' ref='write' contenteditable='true' spellcheck="false" @input='write'
+  @click='test'></div>
 </template>
 
 <script>
 export default {
   props: {
     msg: String
-  },
-  data() {
-    return {
-      // msg: ''
-    }
   },
   methods: {
     write() {
@@ -32,9 +28,11 @@ export default {
     },
     test() {
       // const write = this.$refs.write
-      // const selection = window.getSelection()
-      // let range = selection.getRangeAt(0).commonAncestorContainer
-      // console.log(range)
+      const selection = window.getSelection()
+      let range = selection.getRangeAt(0)
+      console.log(selection)
+      console.log(selection.toString())
+      console.log(range)
       // console.log(this.msg[range.startOffset])
     }
   },
