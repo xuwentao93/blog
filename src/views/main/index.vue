@@ -37,7 +37,6 @@
 
 <script>
 import { menus } from '@/config'
-import wtAlert from '@/components/wtAlert'
 export default {
   data() {
     return {
@@ -59,16 +58,19 @@ export default {
       }
       this.borderTopStyleController = number
       this.$set(this.menus[this.borderTopStyleController], 'borderTopColor', true)
-    },
-    changeHeight(bool) {
-      this.miniHeight = bool
     }
   },
   mounted() {
-    if (this.$route.name === 'write') this.changeHeight(true)
-    this.$router.beforeEach((to, from, next) => { // 用路由去修改height, 是写文章页面就小一点.
-      if (to.name === 'write') this.changeHeight(true)
-      else this.changeHeight(false)
+    const path = this.$route
+    if (path.name ==='dictionary') this.borderTopStyleChange(1)
+    if (path.name ==='topic') this.borderTopStyleChange(2)
+    if (path.name === 'write') {
+      this.borderTopStyleChange(3)
+      this.miniHeight = true
+      }
+    this.$router.beforeEach((to, from, next) => {
+      if (to.name === 'write') this.miniHeight = true
+      else this.miniHeight = false
       next()
     })
   }
@@ -77,9 +79,6 @@ export default {
 </script>
 
 <style scoped lang='scss'>
-// a {
-//   color: #fff;
-// }
 
 .homepage {
   background: #f4f5f5;
@@ -109,7 +108,7 @@ export default {
     height: 60px;
     width: 100%;
     padding: 0 8% 0 12%;
-    z-index: 999;
+    z-index: 99;
     .title {
       float: left;
       height: 60px;

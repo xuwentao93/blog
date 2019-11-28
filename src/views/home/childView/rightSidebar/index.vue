@@ -1,19 +1,19 @@
 <template>
   <div class='decoration'>
     <good-RFC></good-RFC>
-    <good-essay></good-essay>
+    <good-article></good-article>
     <newest-dicionary></newest-dicionary>
   </div>
 </template>
 
 <script>
 import goodRFC from '../goodRFC'
-import goodEssay from '../goodEssay'
+import goodArticle from '../goodArticle'
 import newestDicionary from '../newestDictionary'
 export default {
   components: {
     newestDicionary,
-    goodEssay,
+    goodArticle,
     goodRFC,
   }
 }

@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import dictList from '@/components/wtGetEssayList'
+import dictList from '@/components/wt-getArticleList'
 export default {
   components: {
     dictList

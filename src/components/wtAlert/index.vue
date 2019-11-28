@@ -1,13 +1,15 @@
 <template>
   <div>
-    <div class="wt-alert" @click='test' :class='theme ? `wt-alert-${theme}` : ""'>
+    <div class="wt-alert" :class='theme ? `wt-alert-${theme}` : ""' ref='wtAlert'>
       <i class="fa fa-exclamation-triangle" v-if='theme === "Warning"'></i>
       <i class="fa fa-times-circle" v-if='theme === "Error"'></i>
       <i class="fa fa-info-circle" v-if='theme === "Information"'></i>
       <i class="fa fa-check-circle" v-if='theme === "Success"'></i>
-      <i class="el-icon-close"></i>
+      <i class="el-icon-close" @click='close'></i>
       <div class='title'>{{ theme }}!</div>
-      <slot></slot>
+      <div class="text">
+        <slot></slot>
+      </div>
     </div>
     <!-- <div class="cover"></div> -->
   </div>
@@ -39,9 +41,24 @@ export default {
     }
   },
   methods: {
-    test() {
-      console.log(this.theme)
+    close() {
+      this.$emit('close')
     }
+  },
+  mounted() {
+    if (this.automaticCloseTime) setTimeout(() => this.$emit('close'), this.automaticCloseTime)
+    setTimeout(() => { // $nextTick 也不行, 也会立即执行(即跳过transition的过渡时间)
+      const wtAlert = this.$refs.wtAlert
+      wtAlert.style.transform = 'translateY(-20px)'
+    }, 0)
+  },
+  beforeDestroy() {
+    const wtAlert = this.$refs.wtAlert
+    wtAlert.style.transform = 'translateY(0)'
+    console.log('destroyed')
+  },
+  beforeCreate() {
+    console.log(1)
   }
 }
 </script>
@@ -51,14 +68,27 @@ export default {
   position: fixed;
   left: 50%;
   top: 100px;
-  z-index: 9999;
+  z-index: 99999;
   width: 420px;
   padding: 8px 15px 8px 40px;
+  margin-left: -210px;
   min-height: 40px;
   border: 1px solid #eee;
   color: #000;
   background: #fff;
-  transform: translateX(-50%);
+  transform: translateY(0);
+  transition: transform .4s;
+}
+
+.title {
+  margin-bottom: 5px;
+  font: 700 16px Consolas, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+  'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.text {
+  font: 11px Consolas -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;;
 }
 
 .fa {
@@ -68,31 +98,11 @@ export default {
   font-size: 16px;
 }
 
-.fa-exclamation-triangle {
-  color: #faad14;
-}
-
-.fa-times-circle {
-  color: #f5222d;
-}
-
-.fa-info-circle {
-  color: #1890ff;
-}
-
-.fa-check-circle {
-  color: #52c41a;
-}
-
 .el-icon-close {
   position: absolute;
   top: 5px;
   right: 7px;
   cursor: pointer;
-}
-.title {
-  font: 700 16px Consolas, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
-    'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .wt-alert-Warning {
@@ -109,5 +119,21 @@ export default {
 
 .wt-alert-Information {
   background: #e6f7ff;
+}
+
+.fa-exclamation-triangle {
+  color: #faad14;
+}
+
+.fa-times-circle {
+  color: #f5222d;
+}
+
+.fa-info-circle {
+  color: #1890ff;
+}
+
+.fa-check-circle {
+  color: #52c41a;
 }
 </style>

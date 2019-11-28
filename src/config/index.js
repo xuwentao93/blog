@@ -30,11 +30,11 @@ export const selfMsgMenuList = [
   },
   {
     name: '保存的文章',
-    to: '/selfMsg/essay'
+    to: '/selfMsg/article'
   }
 ]
 
-export const essayType = [
+export const articleType = [
   {
     type: 'web'
   },
@@ -48,6 +48,6 @@ export const essayType = [
     type: 'learn'
   },
   {
-    type: 'dictionray'
+    type: 'dictionary'
   }
 ]

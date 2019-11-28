@@ -1,17 +1,17 @@
 <template>
   <div class='home'>
     <carousel-content></carousel-content>
-    <essay-list></essay-list>
+    <article-list></article-list>
   </div>
 </template>
 
 <script>
 import carouselContent from './carousel'
-import essayList from './essay'
+import articleList from './article'
 export default {
   components: {
     carouselContent,
-    essayList
+    articleList
   }
 }
 </script>

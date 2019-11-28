@@ -1,19 +1,19 @@
 <template>
-  <div class='essay'>
+  <div class='article'>
     <div class="change-type">
       <ul>
         <li v-for='type in typeList' :key='type' class='type' @click='changeType(type)'>{{ type }}</li>
       </ul>
     </div>
-    <essay-list :type='type'></essay-list>
+    <article-list :type='type'></article-list>
   </div>
 </template>
 
 <script>
-import essayList from '@/components/wtGetEssayList'
+import articleList from '@/components/wt-getArticleList'
 export default {
   components: {
-    essayList
+    articleList
   },
   data() {
     return {
@@ -30,7 +30,7 @@ export default {
 </script>
 
 <style scoped>
-.essay {
+.article {
   width: 100%;
 }
 .type {

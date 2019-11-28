@@ -34,7 +34,7 @@ export default {
       })
     },
     redirect() {
-      this.$router.push(`/essay/piedaochuan/dictionary/${this.data.time}`)
+      this.$router.push(`/article/piedaochuan/dictionary/${this.data.time}`)
     }
   },
   created() {

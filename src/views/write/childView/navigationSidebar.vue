@@ -1,15 +1,16 @@
 <template>
   <div class="title">
-    <wt-carousel theme='Warning'>
+    <wt-carousel :theme='msgTheme' v-if="warning" @close='closeMsg'>
       <span>{{ errorMsg }}</span>
     </wt-carousel>
     <div class="upload">
-      <el-button type="primary" @click='save'>保存</el-button>
-      <el-button type="success" @click="upload">发布</el-button>
+      <el-button type="primary" @click='saveOrUpload("save")'>保存</el-button>
+      <el-button type="success" @click='saveOrUpload("upload")'>发布</el-button>
     </div>
-    <input class='title-input' v-model="title" placeholder="请输入文章标题..." spellcheck="false"/>
-    <el-select v-model='type' placeholder="choose essay type">
-      <el-option v-for='type in essayType' :key='type.type' :value='type.type'></el-option>
+    <input class='title-input' v-model="title" placeholder="please input your article title..."
+    spellcheck="false"/>
+    <el-select v-model='type' placeholder="choose article type">
+      <el-option v-for='type in articleType' :key='type.type' :value='type.type'></el-option>
     </el-select>
     <div class="tools">
       <i class="fa fa-bold"></i>
@@ -22,8 +23,7 @@
 
 <script>
 import { save, upload } from '@/api/file'
-import { test } from '@/api/test'
-import { essayType } from '@/config'
+import { articleType } from '@/config'
 import wtCarousel from '@/components/wtAlert'
 export default {
   components: {
@@ -36,49 +36,54 @@ export default {
     return {
       title: '',
       type: '',
-      essayType,
-      errorMsg: '请选择类型'
+      articleType,
+      errorMsg: 'Please choose your type.',
+      warning: false,
+      msgTheme: 'Warning'
     }
   },
   methods: {
-    save() {
-      if (this.type === '') {
-        alert('请选择类型!')
-        return
-      }
-      save({
-        type: this.type,
-        username: this.$store.state.user.user,
-        title: this.title,
-        msg: this.msg
-      })
-      .then(res => {
-        if (res.data === 'success') alert('保存成功!')
-      })
-      .catch(error => console.log('save error: ' + error))
-    },
-    upload() {
-      if (this.type === '') {
-        alert('请选择类型!')
-        return
-      }
+    saveOrUpload(api) {
+      let saveUpload = api === 'save' ? save : upload
+      this.msgTheme = 'Warning'
       if (this.title === '') {
-        alert('标题不能位空!')
+        this.errorMsg = 'Please input your title.'
+        this.warning = true
         return
       }
-      let ifHandIn = confirm('确认要上传吗')
-      if (!ifHandIn) return
-      upload({
+      if (this.type === '') {
+        this.errorMsg = 'Please choose your type.'
+        this.warning = true
+        return
+      }
+      if (this.title.length < 5 && this.title.length > 25) {
+        this.errorMsg = 'Title\'s length should between 5 and 25.'
+        this.warning = true
+        return
+      }
+      if (this.msg.length < 100) {
+        this.errorMsg = 'Please type more than 100 words in your text.'
+        this.warning = true
+        return
+      }
+      saveUpload({
         type: this.type,
         username: this.$store.state.user.user,
         title: this.title,
         msg: this.msg
       })
       .then(res => {
-        if (res.data === 'success') alert('上传成功')
+        if (res.data === 'success') {
+          this.msgTheme = 'Success'
+          this.errorMsg = api === 'save' ? 'save successfully.' : 'Uploaded successfully.'
+          this.warning = true
+        }
       })
-      .catch(error => console.log('handIn error: ' + error))
+      .catch(error => console.log('saveUpload error: ' + error))
     },
+    closeMsg() {
+      this.warning = false
+    }
   }
 }
 </script>
@@ -113,8 +118,11 @@ export default {
     font-family: Monaco, Menlo, Ubuntu Mono, Consolas, source-code-pro, monospace;
     font-size: 22px;
     font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     outline: none;
-    background: transparent
+    background: transparent;
+
   }
   .el-select {
     margin: 0 40px;

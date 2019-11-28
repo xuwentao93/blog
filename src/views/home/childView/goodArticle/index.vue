@@ -1,5 +1,5 @@
 <template>
-  <div class='good-essay'>
+  <div class='good-article'>
     <a href="https://es6.ruanyifeng.com/" target="_blank">
       <img :src='src' class='img'>
     </a>
@@ -17,7 +17,7 @@ export default {
 </script>
 
 <style scoped lang='scss'>
-// .good-essay {
+// .good-article {
 
 // }
 .img {

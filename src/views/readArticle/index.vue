@@ -2,37 +2,37 @@
   <div class='dict-container'>
     <div class='dict'>
       <div class="dict-msg-title-only">
-        <span class='title'>{{ essay.title }}</span>
-        <span class='time'>{{ essay.time }}</span>
+        <span class='title'>{{ article.title }}</span>
+        <span class='time'>{{ article.time }}</span>
       </div>
-      <div v-html='essay.text'></div>
+      <div v-html='article.text'></div>
     </div>
   </div>
 </template>
 
 <script>
-import { getEssayText } from '@/api/file'
+import { getArticleText } from '@/api/file'
 export default {
   data() {
     return {
-      essay: '',
+      article: '',
       username: this.$store.state.user.user
     }
   },
   methods: {
-    getEssayText() {
-      getEssayText({
+    getArticleText() {
+      getArticleText({
         url: `..${this.$route.path}`
       })
       .then(res => {
         console.log(res.data)
-        this.essay = res.data
+        this.article = res.data
       })
     }
   },
   created() {
     console.log(this.$route.path)
-    this.getEssayText()
+    this.getArticleText()
   }
 }
 </script>

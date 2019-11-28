@@ -1,12 +1,12 @@
 <template>
-  <div class='essay-list-container'>
-    <div class='essay-list' v-for='essay in essayList' :key='essay.url' 
-    @click='redirect(essay.url)'>
-      <span class='theme'>{{ essay.type }}</span>
-      <div class='title'>{{ essay.title }}</div>
+  <div class='article-list-container'>
+    <div class='article-list' v-for='article in articleList' :key='article.url' 
+    @click='redirect(article.url)'>
+      <span class='theme'>{{ article.type }}</span>
+      <div class='title'>{{ article.title }}</div>
       <div class='clear-float'>
-        <img src="../../assets/imgs/test.jpg" class='essay-img'>
-        <p class='essay-text'>
+        <img src="../../assets/imgs/test.jpg" class='article-img'>
+        <p class='article-text'>
           返回一个数字，其表示的是选区终点在 focusNode 中的位置偏移量。
 如果 focusNode 是文字节点，那么选区末尾未被选中的第一个字，在该文字节点中是第几个字（从0开始计），就返回它。
 如果 focusNode 是一个元素，那么返回的就是在选区末尾之后第一个节点之前的同级节点总数。
@@ -19,11 +19,11 @@ isCollapsed
       <div class='author-time'>
         <div class='user-info'>
           <i class="fa fa-user"></i>
-          <span> {{ essay.username }}</span>
+          <span> {{ article.username }}</span>
         </div>
         <div class='time-info'>
           <i class="fa fa-clock-o"></i>
-          <span> {{ essay.time }}</span>
+          <span> {{ article.time }}</span>
         </div>
       </div>
     </div>
@@ -31,7 +31,7 @@ isCollapsed
 </template>
 
 <script>
-import { readEssay, readSave } from '@/api/file'
+import { readArticle, readSave } from '@/api/file'
 export default {
   props: {
     type: { // 决定是哪种类型, 如果是all, 就筛选全部数据.
@@ -49,7 +49,7 @@ export default {
   },
   data () {
     return {
-      essayList: [],
+      articleList: [],
       username: this.$store.state.user.user
     }
   },
@@ -62,19 +62,19 @@ export default {
       this.$router.push(`${url}`)
     },
     read() { // 读取文章.
-      let api = this.isSave ? readSave : readEssay
+      let api = this.isSave ? readSave : readArticle
       api({
         username: this.username,
         type: this.type,
         isSelf: this.isSelf
       })
       .then(res => {
-        this.essayList = res.data
+        this.articleList = res.data
       })
-      .catch(err => console.log(`err comes from weGetEssayList, api is ${api}, err is ${err}`))
+      .catch(err => console.log(`err comes from weGetarticleList, api is ${api}, err is ${err}`))
     },
     test() {
-      console.log(this.essayList)
+      console.log(this.articleList)
     }
   },
   created() {
@@ -102,7 +102,7 @@ export default {
   color: #b2bac2;
 }
 
-.essay-list-container {
+.article-list-container {
   width: 100%;
   min-width: 700px;
   // margin: 0 10%;
@@ -121,7 +121,7 @@ export default {
   }
 }
 
-.essay-list {
+.article-list {
   width: 100%;
   height: 230px;
   padding: 18px 24px;
@@ -137,13 +137,13 @@ export default {
   .theme {
     color: #f06
   }
-  .essay-img {
+  .article-img {
     float: left;
     display: block;
     width: 180px;
     height: 123px;
   }
-  .essay-text {
+  .article-text {
     position: relative;
     left: 14px;
     width: calc(100% - 200px);

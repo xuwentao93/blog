@@ -28,9 +28,9 @@ export default new router({
             component: () => import('@/views/dictionary')
           },
           {
-            path: '/essay/:id/:id/:id', // 3个id 分别对应用户名, 类型, 文章名字.
-            name: 'readEssay',
-            component: () => import('@/views/readEssay')
+            path: '/article/:id/:id2/:id3', // 3个id 分别对应用户名, 类型, 文章名字.
+            name: 'readArticle',
+            component: () => import('@/views/readArticle')
           },
         ]
       },
@@ -51,9 +51,9 @@ export default new router({
             component: () => import('@/views/selfMsg/childView/basicMsg')
           },
           {
-            path: '/selfMsg/essay',
-            name: 'selfMsgEssay',
-            component: () => import('@/views/selfMsg/childView/essay')
+            path: '/selfMsg/article',
+            name: 'selfMsgArticle',
+            component: () => import('@/views/selfMsg/childView/article')
           }
         ]
       }
@@ -68,6 +68,11 @@ export default new router({
     path: '/register',
     name: 'register',
     component: () => import('@/views/register')
-  }
+  },
+  {
+    path: '/404',
+    name: '404',
+    component: () => import('@/views/404')
+  },
   ]
 })
