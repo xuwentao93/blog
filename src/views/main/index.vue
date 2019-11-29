@@ -4,7 +4,13 @@
     <header class="header" :class='{ miniHeight }'>
       <div class="cover" :class='{ miniHeight }'></div>      
       <div class='navigation-sidebar'>
-        <div class="title">BARUNKA.</div>
+        <div class="title">
+          <span>CONCATE ME</span>
+          <span class='email'>a15157756529@gmail.com</span>
+        </div>
+        <a href="https://www.github.com/xuwentao93" class="github" target="_blank">
+          <img src="https://github.githubassets.com/pinned-octocat.svg" alt="">
+        </a>
         <div class="menu">
           <ul class="list">
             <li v-for="(menu, index) in menus" :key="menu.content" class="menu-link" 
@@ -18,9 +24,9 @@
           <router-link class="register-button" v-if='user === null' to='/register'>
             <span>sign up</span>
           </router-link>
-          <div class="username-list" v-else @click='toSelfMsg'>
+          <div class="username-list" v-else>
             <span>WELCOME!</span>
-            <span class='username'>{{ user }}</span>
+            <span class='username' @click='toSelfMsg'>{{ user }}</span>
           </div>
         </div>
       </div>
@@ -107,10 +113,11 @@ export default {
     position: relative;
     height: 60px;
     width: 100%;
-    padding: 0 8% 0 12%;
+    padding: 0 8% 0 10%;
     z-index: 99;
     .title {
       float: left;
+      position: relative; // 为了用于子元素.email的定位设定的属性.
       height: 60px;
       line-height: 60px;
       font-size: 18px;
@@ -119,8 +126,33 @@ export default {
       color: #fff;
       cursor: pointer;
       transition: transform .4s;
+      .email {
+        position: absolute;
+        top: -20px;
+        left: -40px;
+        display: none;
+        font-size: 15px;
+        color: #49f;
+      }
       &:hover {
-        transform: translateY(3px);
+        transform: translateY(10px);
+        text-decoration: underline;
+        .email {
+          display: inline;
+        }
+      }
+    }
+    .github {
+      position: relative;
+      left: 10%;
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      line-height: 80px;
+      // background: url(../../assets/imgs/home/github.png);
+      img {
+        width: 30px;
+        height: 30px;
       }
     }
   }

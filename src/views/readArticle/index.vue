@@ -15,7 +15,7 @@ import { getArticleText } from '@/api/file'
 export default {
   data() {
     return {
-      article: '',
+      article: {},
       username: this.$store.state.user.user
     }
   },
@@ -25,13 +25,19 @@ export default {
         url: `..${this.$route.path}`
       })
       .then(res => {
-        console.log(res.data)
-        this.article = res.data
+        if (res.data === 404) {
+          this.article = {
+            title: '什么, 文章不见了?',
+            text: '我们会尽快帮你找回文章哟!'
+          }
+        } else {
+          this.article = res.data
+        }
       })
+      .catch(err => console.log(err))
     }
   },
   created() {
-    console.log(this.$route.path)
     this.getArticleText()
   }
 }

@@ -30,9 +30,9 @@ export default {
       // const write = this.$refs.write
       const selection = window.getSelection()
       let range = selection.getRangeAt(0)
-      console.log(selection)
-      console.log(selection.toString())
-      console.log(range)
+      // console.log(selection)
+      // console.log(selection.toString())
+      // console.log(range)
       // console.log(this.msg[range.startOffset])
     }
   },

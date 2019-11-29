@@ -54,6 +54,11 @@ export default new router({
             path: '/selfMsg/article',
             name: 'selfMsgArticle',
             component: () => import('@/views/selfMsg/childView/article')
+          },
+          {
+            path: '/topic',
+            name: 'topic',
+            component: () => import('@/views/topic')
           }
         ]
       }
@@ -70,7 +75,7 @@ export default new router({
     component: () => import('@/views/register')
   },
   {
-    path: '/404',
+    path: '*',  //页面不存在
     name: '404',
     component: () => import('@/views/404')
   },

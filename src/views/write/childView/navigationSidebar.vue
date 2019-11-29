@@ -46,8 +46,14 @@ export default {
     saveOrUpload(api) {
       let saveUpload = api === 'save' ? save : upload
       this.msgTheme = 'Warning'
+      const titleExp = /^[\.0-9a-zA-z '"\u4e00-\u9fa5]{5,25}$/
       if (this.title === '') {
         this.errorMsg = 'Please input your title.'
+        this.warning = true
+        return
+      }
+      if (!titleExp.test(this.title)) {
+        this.errorMsg = 'Title avalid.'
         this.warning = true
         return
       }
