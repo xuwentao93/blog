@@ -29,10 +29,6 @@ export default {
     } 
   },
   mounted() {
-    if (!this.$store.state.user.user) {
-      alert(404)
-      this.$router.push('/login')
-    }
     this.$emit('changeHeight')
   }
 } 

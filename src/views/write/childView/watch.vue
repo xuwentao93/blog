@@ -6,7 +6,6 @@
 </template>
 
 <script>
-import wtAlert from '@/components/wtAlert'
 export default {
   props: {
     msg: String

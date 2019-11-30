@@ -6,32 +6,26 @@
       <div class='title'>{{ article.title }}</div>
       <div class='clear-float'>
         <img src="../../assets/imgs/test.jpg" class='article-img'>
-        <p class='article-text'>
-          返回一个数字，其表示的是选区终点在 focusNode 中的位置偏移量。
-如果 focusNode 是文字节点，那么选区末尾未被选中的第一个字，在该文字节点中是第几个字（从0开始计），就返回它。
-如果 focusNode 是一个元素，那么返回的就是在选区末尾之后第一个节点之前的同级节点总数。
-isCollapsed返回一个数字，其表示的是选区终点在 focusNode 中的位置偏移量。
-如果 focusNode 是文字节点，那么选区末尾未被选中的第一个字，在该文字节点中是第几个字（从0开始计），就返回它。
-如果 focusNode 是一个元素，那么返回的就是在选区末尾之后第一个节点之前的同级节点总数。
-isCollapsed
-        </p>
+        <p class='article-text' v-html='article.text'></p>
       </div>
-      <div class='author-time'>
-        <div class='user-info'>
-          <i class="fa fa-user"></i>
-          <span> {{ article.username }}</span>
-        </div>
-        <div class='time-info'>
-          <i class="fa fa-clock-o"></i>
-          <span> {{ article.time }}</span>
-        </div>
+      <div class='essay-info'>
+        <i class="fa fa-user"></i>
+        <span> {{ article.username }}</span>
+        <i class="fa fa-clock-o"></i>
+        <span> {{ article.time }}</span>
+        <i class="fa fa-eye"></i>
+        <span>{{ article.watch }}</span>
+        <i class="fa fa-star"></i>
+        <span>{{ article.follow }}</span>
+        <i class="fa fa-thumbs-up"></i>
+        <span>{{ article.thumbsup }}</span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { readArticle, readSave } from '@/api/file'
+import { readArticle, readSave, getArticleText } from '@/api/file'
 export default {
   props: {
     type: { // 决定是哪种类型, 如果是all, 就筛选全部数据.
@@ -125,7 +119,7 @@ export default {
   width: 100%;
   height: 230px;
   padding: 18px 24px;
-  // margin: 10px 0;
+  margin: 10px 0;
   border: 1px solid #eee;
   background: #fff;
   cursor: pointer;
@@ -135,7 +129,14 @@ export default {
     background: #fafafa;
   }
   .theme {
-    color: #f06
+    display: inline-block;
+    width: 50px;
+    height: 25px;
+    margin-right: 10px;
+    text-align: center;
+    line-height: 25px;
+    border: 1px solid #f55;
+    color: #f55;
   }
   .article-img {
     float: left;
@@ -146,24 +147,38 @@ export default {
   .article-text {
     position: relative;
     left: 14px;
-    width: calc(100% - 200px);
-    height: 114px;
+    height: 80px;
+    display: -webkit-box;
     overflow: hidden;
-    text-overflow: ellipsis; // 溢出用省略号显示
-    word-break: break-all;
-    // white-space: nowrap; // 溢出不换行
+    width: calc(100% - 200px);
     margin: 0;
+    color: #99a;
+    // text-overflow: ellipsis;
+    // white-space: nowrap;
+    
   }
 }
 
-.author-time {
+.essay-info {
   float: right;
+  margin-top: 15px;
   font-size: 15px;
   color: #909090;
-  .user-info,
-  .time-info {
+  .fa {
     display: inline-block;
-    margin: 20px 20px 0 0;
+    margin: 0 2px 0 20px;
   }
+}
+
+.fa-clock-o {
+  color: #49f;
+}
+
+.fa-star {
+  color: #fc3;
+}
+
+.fa-thumbs-up {
+  color: #e11;
 }
 </style>

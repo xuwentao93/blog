@@ -4,8 +4,8 @@
       <span>{{ errorMsg }}</span>
     </wt-carousel>
     <div class="upload">
-      <el-button type="primary" @click='saveOrUpload("save")'>保存</el-button>
-      <el-button type="success" @click='saveOrUpload("upload")'>发布</el-button>
+      <el-button type="primary" @click='saveOrUpload("save")' :loading='saveLoading'>保存</el-button>
+      <el-button type="success" @click='saveOrUpload("upload")' :loading="uploadLoading">发布</el-button>
     </div>
     <input class='title-input' v-model="title" placeholder="please input your article title..."
     spellcheck="false"/>
@@ -17,6 +17,9 @@
       <i class="fa fa-link"></i>
       <i class="fa fa-code"></i>
       <i class="fa fa-picture-o"></i>
+      <wt-uploadimg>
+        <el-button>上传图片</el-button>
+      </wt-uploadimg>
     </div>
   </div>
 </template>
@@ -24,10 +27,12 @@
 <script>
 import { save, upload } from '@/api/file'
 import { articleType } from '@/config'
-import wtCarousel from '@/components/wtAlert'
+import wtMsg from '@/components/wt-msg'
+import wtUploadimg from '@/components/wt-uploadimg'
 export default {
   components: {
-    wtCarousel
+    wtMsg,
+    wtUploadimg
   },
   props: {
     msg: String
@@ -39,21 +44,27 @@ export default {
       articleType,
       errorMsg: 'Please choose your type.',
       warning: false,
-      msgTheme: 'Warning'
+      msgTheme: 'Warning',
+      saveLoading: false,
+      uploadLoading: false
     }
   },
   methods: {
     saveOrUpload(api) {
-      let saveUpload = api === 'save' ? save : upload
       this.msgTheme = 'Warning'
-      const titleExp = /^[\.0-9a-zA-z '"\u4e00-\u9fa5]{5,25}$/
+      const titleExp = /^[\.0-9a-zA-z '"\u4e00-\u9fa5]{6,32}$/
       if (this.title === '') {
         this.errorMsg = 'Please input your title.'
         this.warning = true
         return
       }
+      if (this.title.length < 6 && this.title.length > 32) {
+        this.errorMsg = 'Title\'s length should between 6 and 32.'
+        this.warning = true
+        return
+      }
       if (!titleExp.test(this.title)) {
-        this.errorMsg = 'Title avalid.'
+        this.errorMsg = 'Title is unvalid.(required by number, letters, char \'"\"" and "."'
         this.warning = true
         return
       }
@@ -62,16 +73,14 @@ export default {
         this.warning = true
         return
       }
-      if (this.title.length < 5 && this.title.length > 25) {
-        this.errorMsg = 'Title\'s length should between 5 and 25.'
-        this.warning = true
-        return
-      }
+
       if (this.msg.length < 100) {
         this.errorMsg = 'Please type more than 100 words in your text.'
         this.warning = true
         return
       }
+      let saveUpload = api === 'save' ? save : upload
+      this[`${api}loading`] = true
       saveUpload({
         type: this.type,
         username: this.$store.state.user.user,
@@ -79,6 +88,7 @@ export default {
         msg: this.msg
       })
       .then(res => {
+        this[`${api}loading`] = true
         if (res.data === 'success') {
           this.msgTheme = 'Success'
           this.errorMsg = api === 'save' ? 'save successfully.' : 'Uploaded successfully.'
@@ -119,7 +129,7 @@ export default {
   .title-input {
     display: inline-block;
     padding: 20px 0;
-    width: 30%;
+    width: 33%;
     border-width: 0;
     font-family: Monaco, Menlo, Ubuntu Mono, Consolas, source-code-pro, monospace;
     font-size: 22px;

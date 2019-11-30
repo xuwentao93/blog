@@ -1,11 +1,28 @@
 <template>
   <div class='dict-container'>
-    <div class='dict'>
-      <div class="dict-msg-title-only">
-        <span class='title'>{{ article.title }}</span>
-        <span class='time'>{{ article.time }}</span>
+    <div class="evaluate">
+      <div class="icon-container">
+        <i class="fa fa-thumbs-up"></i>
       </div>
-      <div v-html='article.text'></div>
+      <div class="icon-container">
+        <i class="fa fa-comment"></i>
+      </div>
+      <div class="icon-container">
+        <i class="fa fa-star"></i>
+      </div>
+    </div>
+    <div class='dict'>
+      <div class="head-protrait"></div>
+      <div class="username">{{ article.username }}</div>
+      <div class="time">
+        <span>{{ article.time }}</span>
+        <span>watch</span>
+        <span>{{ article.watch }}</span>
+      </div>
+      <h1 class="article-title">
+        <span class='title'>{{ article.title }}</span>
+      </h1>
+      <div v-html='article.text' class='article-text'></div>
     </div>
   </div>
 </template>
@@ -32,6 +49,7 @@ export default {
           }
         } else {
           this.article = res.data
+          console.log(res.data)
         }
       })
       .catch(err => console.log(err))
@@ -43,10 +61,45 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang='scss'>
 .dict-container {
-  margin: 0 8%;
-  padding: 20px;
+  display: flex;
+  margin-left: 14%;
+  padding: 0 20px;
+}
+
+.evaluate {
+  position: fixed;
+  left: 16%;
+  top: 240px;
+  margin-right: 60px;
+  color: #aaa;
+  .icon-container {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 15px;
+    border-radius: 18px;
+    text-align: center;
+    line-height: 36px;
+    font-size: 17px;
+    background: #fff;
+    box-shadow: 1px 1px 9px #bbb;
+    cursor: pointer;
+    &:hover {
+      color: #888;
+    }
+  }
+}
+
+.article-title {
+  display: block;
+  width: 100%;
+  margin: 20px 0 40px;
+  text-align: center;
+  .title {
+    font-size: 32px;
+    font-weight: 1000;
+  }
 }
 
 .dict {
@@ -55,27 +108,32 @@ export default {
   padding: 20px;
   line-height: 23px;
   font-size: 1.167em;
-  font-family: Monaco, Menlo, Ubuntu Mono, Consolas, source-code-pro, monospace;
   background: #fff;
-}
-.test {
-  display: none;
-}
-</style>
-
-<style lang='scss'>
-.dict-msg-title-only {
-  display: block;
-  width: 100%;
-  margin-bottom: 40px;
-  text-align: center;
-  .title {
-    font-size: 30px;
-    font-weight: 700;
+  .head-protrait {
+    float: left;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background: #f00;
+  }
+  .username {
+    overflow: hidden; // 形成BFC 避免于头像部分重叠.
+    padding-left: 10px;
+    font-size: 15px;
   }
   .time {
-    position: relative;
-    left: 20px;
+    overflow: hidden; // 形成BFC 避免于头像部分重叠.
+    padding-left: 10px;
+    font-size: 13px;
+    color: #899;
+    span {
+      display: inline-block;
+      margin: 0 5px;
+    }
   }
+}
+.article-text {
+    font-family: Monaco, Menlo, Ubuntu Mono, Consolas, source-code-pro, monospace;
+
 }
 </style>

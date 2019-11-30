@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="wt-alert" :class='theme ? `wt-alert-${theme}` : ""' ref='wtAlert'>
+    <div class="wt-alert" :class='theme ? `wt-alert-${theme}` : ""' ref='wtMsg'>
       <i class="fa fa-exclamation-triangle" v-if='theme === "Warning"'></i>
       <i class="fa fa-times-circle" v-if='theme === "Error"'></i>
       <i class="fa fa-info-circle" v-if='theme === "Information"'></i>
@@ -48,13 +48,13 @@ export default {
   mounted() {
     if (this.automaticCloseTime) setTimeout(() => this.$emit('close'), this.automaticCloseTime)
     setTimeout(() => { // $nextTick 也不行, 也会立即执行(即跳过transition的过渡时间)
-      const wtAlert = this.$refs.wtAlert
-      wtAlert.style.transform = 'translateY(-20px)'
+      const wtMsg = this.$refs.wtMsg
+      wtMsg.style.transform = 'translateY(-20px)'
     }, 0)
   },
   beforeDestroy() {
-    const wtAlert = this.$refs.wtAlert
-    wtAlert.style.transform = 'translateY(0)'
+    const wtMsg = this.$refs.wtMsg
+    wtMsg.style.transform = 'translateY(0)'
     console.log('destroyed')
   },
   beforeCreate() {
