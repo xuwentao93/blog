@@ -1,8 +1,8 @@
 <template>
   <div class="title">
-    <wt-carousel :theme='msgTheme' v-if="warning" @close='closeMsg'>
+    <wt-msg :theme='msgTheme' v-if="warning" @close='closeMsg'>
       <span>{{ errorMsg }}</span>
-    </wt-carousel>
+    </wt-msg>
     <div class="upload">
       <el-button type="primary" @click='saveOrUpload("save")' :loading='saveLoading'>保存</el-button>
       <el-button type="success" @click='saveOrUpload("upload")' :loading="uploadLoading">发布</el-button>
@@ -12,14 +12,14 @@
     <el-select v-model='type' placeholder="choose article type">
       <el-option v-for='type in articleType' :key='type.type' :value='type.type'></el-option>
     </el-select>
+    <wt-uploadimg>
+      <el-button>上传图片</el-button>
+    </wt-uploadimg>
     <div class="tools">
       <i class="fa fa-bold"></i>
       <i class="fa fa-link"></i>
       <i class="fa fa-code"></i>
       <i class="fa fa-picture-o"></i>
-      <wt-uploadimg>
-        <el-button>上传图片</el-button>
-      </wt-uploadimg>
     </div>
   </div>
 </template>

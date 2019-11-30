@@ -99,7 +99,7 @@ export default {
 .article-list-container {
   width: 100%;
   min-width: 700px;
-  // margin: 0 10%;
+  margin-right: 20px;
   padding-top: 25px;
   background: #f4f5f5;
 }
@@ -130,8 +130,8 @@ export default {
   }
   .theme {
     display: inline-block;
-    width: 50px;
     height: 25px;
+    padding: 0 5px;
     margin-right: 10px;
     text-align: center;
     line-height: 25px;
@@ -147,15 +147,11 @@ export default {
   .article-text {
     position: relative;
     left: 14px;
-    height: 80px;
-    display: -webkit-box;
+    height: 78px;
     overflow: hidden;
     width: calc(100% - 200px);
     margin: 0;
-    color: #99a;
-    // text-overflow: ellipsis;
-    // white-space: nowrap;
-    
+    color: #99a;    
   }
 }
 

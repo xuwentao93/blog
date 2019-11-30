@@ -2,7 +2,6 @@
   <div class='newest-dict'>
     <h1>newest dict</h1>
     <p>
-      <span class='type point'>type</span>
       <span class='theme point'>dictionary</span>
       <span class='username-time'>
         <span class='point'>piedaochuan</span>

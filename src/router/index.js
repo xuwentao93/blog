@@ -54,13 +54,13 @@ export default new router({
             path: '/selfMsg/article',
             name: 'selfMsgArticle',
             component: () => import('@/views/selfMsg/childView/article')
-          },
-          {
-            path: '/topic',
-            name: 'topic',
-            component: () => import('@/views/topic')
           }
         ]
+      },
+      {
+        path: '/topic',
+        name: 'topic',
+        component: () => import('@/views/topic')
       }
     ]
   },

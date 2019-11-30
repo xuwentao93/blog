@@ -39,6 +39,10 @@ export default {
 </script>
 
 <style scoped lang='scss'>
+.upload-img {
+  display: inline-block; // 防止引入后引起页面过多的布局排版.
+}
+
 .prove-img {
   display: none;
 }
