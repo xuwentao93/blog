@@ -4,7 +4,6 @@
       <ul ckass='type-list'>
         <li v-for='type in typeList' :key='type' class='type' @click='changeType(type)'>{{ type }}</li>
       </ul>
-      <self-input></self-input>
     </div>
     <article-list :type='type'></article-list>
   </div>

@@ -3,8 +3,8 @@ import qs from 'qs'
 
 const request = axios.create({
   timeout: 5000,
-  // baseURL: 'http://localhost:3000',
-  baseURL: 'http://www.woyunnanyuan.com:3000',
+  baseURL: 'http://localhost:3000',
+  // baseURL: 'http://www.woyunnanyuan.com:3000',
   headers: {
     'Content-type': 'application/x-www-form-urlencoded'
   }
@@ -24,6 +24,6 @@ request.interceptors.request.use(config => {
 //   } catch(error) {
 //     console.log('can\'t parse resonse data, maybe it\'s already be parsed')
 //   }
-// })
+// 
 
-  export default request
+export default request

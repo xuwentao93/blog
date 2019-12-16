@@ -1,12 +1,12 @@
 <template>
-  <self-carousel class='carousel' :imgs='carouselList' :duration='2500' :autoplay='false'></self-carousel>
+  <wt-carousel class='carousel' :imgs='carouselList' :duration='2500' :autoplay='false'></wt-carousel>
 </template>
 
 <script>
-import selfCarousel from '@/components/selfCarousel'
+import wtCarousel from '@/components/wt-carousel'
 export default {
   components: {
-    selfCarousel
+    wtCarousel
   },
   data () {
     return {

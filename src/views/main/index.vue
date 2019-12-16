@@ -1,6 +1,5 @@
 <template>
   <div class="homepage">
-
     <header class="header" :class='{ miniHeight }'>
       <div class="cover" :class='{ miniHeight }'></div>      
       <div class='navigation-sidebar'>
@@ -43,6 +42,7 @@
 
 <script>
 import { menus } from '@/config'
+import testNpm from 'xuwentao-personal-dist'
 export default {
   data() {
     return {
@@ -67,6 +67,7 @@ export default {
     }
   },
   mounted() {
+    console.log(testNpm("100", "100"))
     const path = this.$route
     if (path.name ==='dictionary') this.borderTopStyleChange(1)
     if (path.name ==='topic') this.borderTopStyleChange(2)

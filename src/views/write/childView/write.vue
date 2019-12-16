@@ -1,6 +1,6 @@
 <template>
-  <div class="write" tabindex='0' ref='write' contenteditable='true' spellcheck="false" @input='write'
-  @click='test'></div>
+  <div class="write" tabindex='0' ref='write' contenteditable='true' spellcheck="false"
+    @input='write' @click='test'></div>
 </template>
 
 <script>
@@ -61,6 +61,6 @@ export default {
   }
   .write ::selection,
   ::selection {
-    background: #d5d8fc
+    background: #d5e8fc;
   }
 </style>
